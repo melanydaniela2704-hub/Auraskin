@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AURASKIN | K-Beauty & Skincare Curated Store</title>
+  <title>AURASKIN | K-Beauty Curated Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,21 +11,12 @@
   <style>
     :root {
       --bg-cream: #FAF8F5;
-      --bg-sand: #F3EFE8;
       --text-ink: #24201D;
-      --text-muted: #6E665F;
       --accent-earth: #8C735B;
       --border-soft: #E5DFD5;
     }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-cream);
-      color: var(--text-ink);
-      overflow-x: hidden;
-    }
-    h1, h2, h3, .font-editorial {
-      font-family: 'Cormorant Garamond', serif;
-    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-cream); color: var(--text-ink); overflow-x: hidden; }
+    h1, h2, h3, .font-editorial { font-family: 'Cormorant Garamond', serif; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
@@ -33,449 +24,289 @@
 <body class="antialiased selection:bg-[#8C735B] selection:text-white">
 
   <!-- Top Announcement Bar -->
-  <div class="bg-[#24201D] text-[#FAF8F5] text-xs tracking-wider py-2 px-4 text-center flex justify-between items-center px-6">
-    <span>✨ CATÁLOGO AMPLIADO K-BEAUTY · ANUA, MEDICUBE & MÁS · ENVÍOS NACIONALES ✨</span>
-    <button onclick="openAdminLogin()" class="text-[10px] underline uppercase tracking-widest text-[#E5DFD5] hover:text-white">🔒 Acceso Admin</button>
+  <div class="bg-[#24201D] text-[#FAF8F5] text-xs tracking-wider py-2 px-6 flex justify-between items-center">
+    <span>✨ ENVÍOS A TODO EL PAÍS · 100% ORIGINALES ✨</span>
+    <button onclick="openAdminLogin()" class="text-[10px] underline uppercase tracking-widest text-[#E5DFD5] hover:text-white font-bold">🔒 Camerino Backstage (Admin)</button>
   </div>
 
-  <!-- Sticky Header (Logo Centrado Estilo Referencia) -->
-  <header class="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E5DFD5]">
+  <!-- Header con Logo Centrado -->
+  <header class="sticky top-0 z-45 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E5DFD5]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <!-- Left Nav Links -->
       <nav class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.15em] text-[#24201D] font-medium">
         <a href="#catalogo" class="hover:text-[#8C735B] transition">Shop</a>
         <button onclick="filterCategory('Limpiadores')" class="hover:text-[#8C735B] transition">Limpiadores</button>
         <button onclick="filterCategory('Sérums')" class="hover:text-[#8C735B] transition">Sérums</button>
-        <button onclick="filterCategory('Brumas y Tónicos')" class="hover:text-[#8C735B] transition">Tónicos</button>
+        <button onclick="filterCategory('Mascarillas')" class="hover:text-[#8C735B] transition">Mascarillas</button>
       </nav>
 
-      <!-- Centered Brand Logo -->
       <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
-        <a href="#" onclick="resetFilters()" class="font-editorial text-3xl sm:text-4xl tracking-[0.25em] font-bold text-[#24201D]">
-          AURASKIN
-        </a>
+        <a href="#" onclick="resetFilters()" class="font-editorial text-3xl sm:text-4xl tracking-[0.25em] font-bold text-[#24201D]">AURASKIN</a>
       </div>
 
-      <!-- Right Actions -->
       <div class="flex items-center gap-3 ml-auto">
-        <button onclick="openSettings()" title="Configurar WhatsApp" class="p-2 rounded-full hover:bg-[#F3EFE8] text-[#24201D] transition flex items-center gap-1 text-xs font-medium border border-[#E5DFD5]">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>
-        </button>
-
-        <button onclick="toggleCart(true)" class="relative p-2.5 rounded-full bg-[#24201D] text-white hover:bg-[#3d3631] transition flex items-center gap-2 px-4">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-          <span class="text-xs font-medium tracking-wide">Bolsa</span>
+        <button onclick="openSettings()" title="WhatsApp" class="p-2 rounded-full hover:bg-[#F3EFE8] border border-[#E5DFD5] text-xs">💬</button>
+        <button onclick="toggleCart(true)" class="relative p-2.5 rounded-full bg-[#24201D] text-white hover:bg-[#3d3631] flex items-center gap-2 px-4">
+          <span class="text-xs font-medium">Bolsa</span>
           <span id="cartCountBadge" class="bg-[#FAF8F5] text-[#24201D] text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
         </button>
       </div>
-
     </div>
   </header>
 
-  <!-- Editorial Hero Banner -->
-  <section class="relative bg-[#24201D] text-[#FAF8F5] overflow-hidden">
-    <div class="absolute inset-0 opacity-40">
-      <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1600&q=80" alt="Hero Background" class="w-full h-full object-cover" />
-    </div>
-    <div class="relative max-w-5xl mx-auto px-4 py-24 sm:py-32 text-center space-y-6">
-      <p class="text-xs uppercase tracking-[0.3em] text-[#D4C5B9] font-semibold">Curaduría Exclusiva K-Beauty & Anua</p>
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-semibold leading-[1.1] font-editorial">
-        The Auraskin Ritual
-      </h1>
-      <p class="text-sm sm:text-base text-[#E5DFD5] max-w-xl mx-auto leading-relaxed">
-        Variedad completa de las marcas más virales de TikTok. Encuentra tus limpiadores, tónicos, sérums y protectores favoritos.
-      </p>
-      <div class="pt-4">
-        <a href="#catalogo" class="bg-[#FAF8F5] text-[#24201D] px-8 py-4 rounded-full text-xs uppercase tracking-widest font-bold hover:bg-[#E5DFD5] transition shadow-lg">
-          Comprar Ahora
-        </a>
-      </div>
-    </div>
+  <!-- Hero Minimalista -->
+  <section class="bg-[#F3EFE8] border-b border-[#E5DFD5] py-16 text-center px-4">
+    <p class="text-xs uppercase tracking-[0.3em] text-[#8C735B] font-semibold mb-2">Curaduría K-Beauty</p>
+    <h1 class="font-editorial text-4xl sm:text-6xl font-semibold text-[#24201D]">The Glow Ritual</h1>
+    <p class="text-xs sm:text-sm text-[#6E665F] max-w-md mx-auto mt-2">Variedad completa y equilibrada de limpiadores, tónicos, sérums, mascarillas y protectores solares de tus marcas favoritas.</p>
   </section>
 
-  <!-- Main Catalog Section -->
-  <main id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="mb-6">
-      <div class="flex items-center justify-between mb-3">
-        <h2 class="text-2xl sm:text-3xl font-semibold text-[#24201D]">Colección Completa</h2>
-        <span id="productCountLabel" class="text-xs text-[#6E665F]">Mostrando productos</span>
-      </div>
-      <div id="categoryTabs" class="flex gap-2 overflow-x-auto no-scrollbar pb-2"></div>
+  <!-- Catálogo -->
+  <main id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="mb-6 flex items-center justify-between">
+      <h2 class="text-2xl font-semibold">Colección Completa</h2>
+      <span id="productCountLabel" class="text-xs text-[#6E665F]">Mostrando productos</span>
     </div>
-
-    <div class="mb-8">
-      <p class="text-[11px] uppercase tracking-widest text-[#6E665F] mb-2.5 font-medium">Filtrar por marca:</p>
-      <div id="brandPills" class="flex gap-2 overflow-x-auto no-scrollbar pb-2"></div>
-    </div>
+    <div id="categoryTabs" class="flex gap-2 overflow-x-auto no-scrollbar pb-2 mb-4"></div>
+    <div id="brandPills" class="flex gap-2 overflow-x-auto no-scrollbar pb-2 mb-8"></div>
 
     <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
-
-    <div id="emptyState" class="hidden text-center py-16">
-      <p class="font-editorial text-2xl text-[#24201D] mb-2">No encontramos productos con ese filtro</p>
-      <button onclick="resetFilters()" class="bg-[#24201D] text-white px-6 py-2.5 rounded-full text-xs uppercase tracking-wider mt-2">Ver todos</button>
-    </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-[#F3EFE8] border-t border-[#E5DFD5] py-12 px-4 sm:px-6 lg:px-8 mt-12 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
-    <div>
-      <span class="font-editorial text-2xl tracking-[0.18em] font-semibold text-[#24201D]">AURASKIN</span>
-      <p class="text-xs text-[#6E665F] mt-1">Skincare coreano curado con los favoritos de TikTok.</p>
-    </div>
-    <p class="text-xs text-[#6E665F]">© 2026 Auraskin. Todos los derechos reservados.</p>
-  </footer>
-
-  <!-- Product Detail Modal -->
-  <div id="productModal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#FAF8F5] rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#E5DFD5] relative">
-      <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/90 border border-[#E5DFD5] flex items-center justify-center text-[#24201D] hover:bg-[#24201D] hover:text-white transition">✕</button>
-      <div id="modalContent" class="grid grid-cols-1 md:grid-cols-2"></div>
+  <!-- Modal Detalle -->
+  <div id="productModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4">
+    <div class="bg-[#FAF8F5] rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative p-6">
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 text-xl">✕</button>
+      <div id="modalContent" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
     </div>
   </div>
 
-  <!-- Slide-Over Shopping Cart Drawer -->
+  <!-- Carrito -->
   <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
-    <div onclick="toggleCart(false)" class="absolute inset-0 bg-black/40 backdrop-blur-xs"></div>
-    <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-[#FAF8F5] shadow-2xl flex flex-col border-l border-[#E5DFD5]">
-      <div class="p-5 border-b border-[#E5DFD5] flex items-center justify-between">
-        <div>
-          <h3 class="font-editorial text-2xl font-semibold">Tu Bolsa Auraskin</h3>
-          <p class="text-xs text-[#6E665F]">Revisa tus productos antes de enviar a WhatsApp</p>
-        </div>
-        <button onclick="toggleCart(false)" class="w-8 h-8 rounded-full hover:bg-[#F3EFE8] flex items-center justify-center">✕</button>
+    <div onclick="toggleCart(false)" class="absolute inset-0 bg-black/40"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-[#FAF8F5] shadow-2xl flex flex-col p-6">
+      <div class="flex justify-between items-center border-b pb-4 mb-4">
+        <h3 class="font-editorial text-2xl font-semibold">Tu Bolsa</h3>
+        <button onclick="toggleCart(false)">✕</button>
       </div>
-      <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
-      <div class="p-5 border-t border-[#E5DFD5] bg-white space-y-3">
-        <div>
-          <label class="block text-[11px] uppercase tracking-wider text-[#6E665F] mb-1">Tu Nombre</label>
-          <input type="text" id="customerName" placeholder="Ej. Melany" class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-sm outline-none" />
-        </div>
-        <div>
-          <label class="block text-[11px] uppercase tracking-wider text-[#6E665F] mb-1">Ciudad / Zona</label>
-          <input type="text" id="customerCity" placeholder="Ej. Caracas" class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-sm outline-none" />
-        </div>
-        <div class="flex justify-between items-center pt-2 border-t border-[#E5DFD5]">
-          <span class="text-sm text-[#6E665F]">Total estimado</span>
-          <span id="cartTotal" class="font-editorial text-2xl font-bold text-[#24201D]">$0.00</span>
-        </div>
-        <button onclick="checkoutWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold py-3.5 px-4 rounded-full text-sm flex items-center justify-center gap-2 shadow-sm transition">
-          Concretar Compra por WhatsApp
-        </button>
+      <div id="cartItemsContainer" class="flex-1 overflow-y-auto space-y-3"></div>
+      <div class="border-t pt-4 space-y-3">
+        <input type="text" id="customerName" placeholder="Tu Nombre" class="w-full border rounded-lg px-3 py-2 text-sm" />
+        <input type="text" id="customerCity" placeholder="Ciudad / Zona" class="w-full border rounded-lg px-3 py-2 text-sm" />
+        <div class="flex justify-between text-base font-bold"><span>Total:</span><span id="cartTotal">$0.00</span></div>
+        <button onclick="checkoutWhatsApp()" class="w-full bg-[#25D366] text-white py-3 rounded-full text-sm font-semibold">Enviar Pedido por WhatsApp</button>
       </div>
     </div>
   </div>
 
-  <!-- CAMERINO / BACKSTAGE ADMIN MODAL -->
-  <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="bg-[#1E1A17] text-[#FAF8F5] rounded-2xl max-w-5xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-[#3A322C] p-6 relative">
-      <div class="flex justify-between items-center border-b border-[#3A322C] pb-4 mb-6">
-        <div>
-          <h2 class="font-editorial text-3xl font-semibold text-white">🎬 Camerino Backstage — Gestor Auraskin</h2>
-          <p class="text-xs text-[#A89F95]">Modifica precios, enlaces de fotos o nombres en tiempo real sin tocar código.</p>
-        </div>
-        <div class="flex gap-3">
-          <button onclick="saveAdminChanges()" class="bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition">💾 Guardar Cambios</button>
-          <button onclick="closeAdminModal()" class="w-9 h-9 rounded-full bg-[#3A322C] flex items-center justify-center text-white hover:bg-red-600 transition">✕</button>
+  <!-- CAMERINO BACKSTAGE MODAL (ADMIN) -->
+  <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-4">
+    <div class="bg-[#1E1A17] text-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-[#3A322C] pb-4 mb-4">
+        <h2 class="font-editorial text-2xl text-amber-100">🎬 Camerino Backstage — Editar Precios y Fotos</h2>
+        <div class="flex gap-2">
+          <button onclick="saveAdminChanges()" class="bg-[#25D366] px-4 py-1.5 rounded text-xs font-bold">Guardar</button>
+          <button onclick="document.getElementById('adminModal').classList.add('hidden')" class="bg-red-600 px-3 py-1.5 rounded text-xs">Cerrar</button>
         </div>
       </div>
-      <div id="adminProductTable" class="space-y-4"></div>
+      <div id="adminProductTable" class="space-y-3"></div>
     </div>
   </div>
 
-  <!-- Admin Login Modal -->
-  <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#FAF8F5] rounded-2xl max-w-sm w-full p-6 border border-[#E5DFD5] shadow-2xl space-y-4">
-      <h3 class="font-editorial text-2xl font-semibold text-[#24201D]">🔒 Acceso Privado Admin</h3>
-      <p class="text-xs text-[#6E665F]">Ingresa tu contraseña secreta para abrir el camerino de edición:</p>
-      <input type="password" id="adminPasswordInput" placeholder="Contraseña..." class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-sm bg-white outline-none" />
-      <div class="flex justify-end gap-2 pt-2">
-        <button onclick="document.getElementById('adminLoginModal').classList.add('hidden')" class="px-4 py-2 text-xs text-[#6E665F]">Cancelar</button>
-        <button onclick="verifyAdminPassword()" class="bg-[#24201D] text-white px-5 py-2 rounded-full text-xs font-medium">Entrar</button>
+  <!-- Login Admin Modal -->
+  <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-black/60 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
+      <h3 class="text-xl font-bold">Contraseña del Camerino</h3>
+      <input type="password" id="adminPasswordInput" placeholder="Contraseña..." class="w-full border rounded px-3 py-2 text-sm" />
+      <div class="flex justify-end gap-2">
+        <button onclick="document.getElementById('adminLoginModal').classList.add('hidden')" class="text-xs text-gray-500">Cancelar</button>
+        <button onclick="verifyAdminPassword()" class="bg-black text-white px-4 py-1.5 rounded text-xs">Entrar</button>
       </div>
     </div>
   </div>
 
-  <!-- Settings Modal -->
-  <div id="settingsModal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#FAF8F5] rounded-2xl max-w-md w-full p-6 border border-[#E5DFD5] shadow-xl space-y-4">
-      <div class="flex justify-between items-center border-b border-[#E5DFD5] pb-3">
-        <h3 class="font-editorial text-2xl font-semibold">Configurar WhatsApp</h3>
-        <button onclick="closeSettings()" class="text-[#6E665F]">✕</button>
-      </div>
-      <div>
-        <label class="block text-xs font-medium mb-1">Número de WhatsApp (con código de país, sin +)</label>
-        <input type="text" id="settingWhatsapp" class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-sm bg-white" />
-      </div>
-      <div class="flex justify-end gap-2 pt-2">
-        <button onclick="closeSettings()" class="bg-[#24201D] text-white px-5 py-2 rounded-full text-xs font-medium">Guardar</button>
-      </div>
+  <!-- Settings Modal (WhatsApp) -->
+  <div id="settingsModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 space-y-3">
+      <h3 class="font-bold">Número de WhatsApp</h3>
+      <input type="text" id="settingWhatsapp" class="w-full border rounded px-3 py-2 text-sm" placeholder="Ej: 584121234567" />
+      <div class="flex justify-end"><button onclick="closeSettings()" class="bg-black text-white px-4 py-1.5 rounded text-xs">Guardar</button></div>
     </div>
   </div>
 
   <script>
     const DEFAULT_WHATSAPP = "584120000000";
     const ADMIN_PASS = "auraskin2026";
-
     let storeConfig = { whatsapp: localStorage.getItem('auraskin_wa') || DEFAULT_WHATSAPP };
 
-    // Catálogo nutrido con múltiples limpiadores, tónicos, sérums y bloqueadores por marca
+    // Catálogo robusto completo con múltiples limpiadores, tónicos, sérums, cremas, mascarillas en barra/hidrogel y bloqueadores por marca.
     const DEFAULT_PRODUCTS = [
       // --- ANUA ---
-      { id: 1, brand: "Anua", name: "Heartleaf Pore Control Cleansing Oil", category: "Limpiadores", price: 24, size: "200ml", badge: "Viral TikTok", desc: "Aceite limpiador número 1 para puntos negros.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 2, brand: "Anua", name: "Heartleaf Quercetinol Pore Deep Cleansing Foam", category: "Limpiadores", price: 21, size: "150ml", badge: "Top Ventas", desc: "Espuma limpiadora profunda con hoja de cordata.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 3, brand: "Anua", name: "Heartleaf 77% Soothing Toner", category: "Brumas y Tónicos", price: 24, size: "250ml", badge: "Imprescindible", desc: "Tónico calmante ultraligero que equilibra el pH.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 4, brand: "Anua", name: "Heartleaf 77 Clear Pad", category: "Brumas y Tónicos", price: 26, size: "70 discos", badge: "Favorito", desc: "Discos tónicos calmantes para textura e irritación.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 5, brand: "Anua", name: "Peach 70 Niacin Serum", category: "Sérums", price: 28, size: "30ml", badge: "Glass Skin", desc: "Sérum iluminador con melocotón y niacinamida.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 6, brand: "Anua", name: "Dark Spot Correcting Serum (TXA)", category: "Sérums", price: 30, size: "30ml", badge: "Anti-Manchas", desc: "Sérum avanzado para manchas oscuras y tono disparejo.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 7, brand: "Anua", name: "Heartleaf 70 Soothing Cream", category: "Hidratantes", price: 29, size: "50ml", badge: "Calmante", desc: "Crema hidratante ligera para pieles sensibles.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 8, brand: "Anua", name: "Peach 77 Niacin Essence Moisturizer", category: "Hidratantes", price: 27, size: "150ml", badge: "Jugoso", desc: "Hidratante de melocotón para una piel suave y luminosa.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 9, brand: "Anua", name: "Heartleaf Silky Moisture Sun Cream SPF50+", category: "Bloqueadores", price: 23, size: "50ml", badge: "Nuevo", desc: "Protector solar hidratante con extracto de heartleaf.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 1, brand: "Anua", name: "Heartleaf Pore Control Cleansing Oil", category: "Limpiadores", price: 24, size: "200ml", badge: "Viral", desc: "Aceite limpiador para puntos negros.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 2, brand: "Anua", name: "Heartleaf Quercetinol Pore Deep Cleansing Foam", category: "Limpiadores", price: 21, size: "150ml", badge: "Top", desc: "Espuma limpiadora profunda.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 3, brand: "Anua", name: "Heartleaf 77% Soothing Toner", category: "Brumas y Tónicos", price: 24, size: "250ml", badge: "Imprescindible", desc: "Tónico calmante ultraligero.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 4, brand: "Anua", name: "Heartleaf 77 Clear Pad", category: "Brumas y Tónicos", price: 26, size: "70 discos", badge: "Discos", desc: "Discos tónicos calmantes.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 5, brand: "Anua", name: "Peach 70 Niacin Serum", category: "Sérums", price: 28, size: "30ml", badge: "Glass Skin", desc: "Sérum iluminador con melocotón.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 6, brand: "Anua", name: "Dark Spot Correcting Serum", category: "Sérums", price: 30, size: "30ml", badge: "Manchas", desc: "Sérum para tono disparejo.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 7, brand: "Anua", name: "Heartleaf 70 Soothing Cream", category: "Hidratantes", price: 29, size: "50ml", badge: "Calmante", desc: "Crema hidratante ligera.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
+      { id: 8, brand: "Anua", name: "Heartleaf Clay Mask Stick", category: "Mascarillas", price: 20, size: "50g", badge: "En Barra", desc: "Mascarilla de arcilla en barra práctica.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
+      { id: 9, brand: "Anua", name: "Heartleaf Silky Moisture Sun Cream SPF50+", category: "Bloqueadores", price: 23, size: "50ml", badge: "Solar", desc: "Protector solar hidratante.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 10, brand: "Anua", name: "Airy Sun Cream SPF50+", category: "Bloqueadores", price: 22, size: "50ml", badge: "Toque Seco", desc: "Protector solar acabado ligero.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
 
       // --- MEDICUBE ---
-      { id: 10, brand: "Medicube", name: "Red Body Scrub & Wash (Corporal)", category: "Limpiadores", price: 29, size: "400ml", badge: "Viral Corporal", desc: "Exfoliante corporal rojo para brotes en la espalda.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 11, brand: "Medicube", name: "PDRN Pink Collagen Gel Cleanser", category: "Limpiadores", price: 28, size: "150ml", badge: "Glass Skin", desc: "Limpiador facial con colágeno y PDRN.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 12, brand: "Medicube", name: "PDRN Pink Collagen Glow Jelly Mist", category: "Brumas y Tónicos", price: 27, size: "100ml", badge: "Viral Mist", desc: "Bruma bifásica de gelatina y colágeno.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 13, brand: "Medicube", name: "Deep Vita C Ampoule Toner", category: "Brumas y Tónicos", price: 26, size: "140ml", badge: "Vitamina C", desc: "Tónico iluminador con vitamina C pura.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 14, brand: "Medicube", name: "PDRN Pink Peptide Serum", category: "Sérums", price: 31, size: "30ml", badge: "Top Ventas", desc: "Sérum reafirmante con PDRN y péptidos.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 15, brand: "Medicube", name: "Triple Collagen Serum 2.0", category: "Sérums", price: 33, size: "45ml", badge: "Firmeza", desc: "Sérum concentrado de colágeno triple acción.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 16, brand: "Medicube", name: "Collagen Jelly Cream", category: "Hidratantes", price: 31, size: "110ml", badge: "Efecto Relleno", desc: "Crema en gelatina transparente con colágeno.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 17, brand: "Medicube", name: "Deep Vita C Capsule Cream", category: "Hidratantes", price: 32, size: "55g", badge: "Luminosidad", desc: "Crema con cápsulas de vitamina C.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 18, brand: "Medicube", name: "Red Clear Cica Sun Cushion SPF50+", category: "Bloqueadores", price: 27, size: "25g", badge: "Cushion Solar", desc: "Protector solar en cushion calmante para piel grasa.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 11, brand: "Medicube", name: "Red Body Scrub & Wash (Corporal)", category: "Limpiadores", price: 29, size: "400ml", badge: "Corporal", desc: "Exfoliante para brotes en espalda.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 12, brand: "Medicube", name: "PDRN Pink Collagen Gel Cleanser", category: "Limpiadores", price: 28, size: "150ml", badge: "Glass Skin", desc: "Limpiador facial con colágeno.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 13, brand: "Medicube", name: "PDRN Pink Collagen Glow Jelly Mist", category: "Brumas y Tónicos", price: 27, size: "100ml", badge: "Viral", desc: "Bruma bifásica de gelatina.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 14, brand: "Medicube", name: "Deep Vita C Ampoule Toner", category: "Brumas y Tónicos", price: 26, size: "140ml", badge: "Vitamina C", desc: "Tónico iluminador.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 15, brand: "Medicube", name: "PDRN Pink Peptide Serum", category: "Sérums", price: 31, size: "30ml", badge: "Top", desc: "Sérum reafirmante con PDRN.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 16, brand: "Medicube", name: "Triple Collagen Serum 2.0", category: "Sérums", price: 33, size: "45ml", badge: "Firmeza", desc: "Sérum concentrado de colágeno.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 17, brand: "Medicube", name: "Collagen Jelly Cream", category: "Hidratantes", price: 31, size: "110ml", badge: "Relleno", desc: "Crema gelatina con colágeno.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
+      { id: 18, brand: "Medicube", name: "PDRN Pink Collagen Gel Mask", category: "Mascarillas", price: 27, size: "4 und", badge: "Hidrogel", desc: "Mascarilla rosa de colágeno.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
+      { id: 19, brand: "Medicube", name: "Red Clear Cica Sun Cushion SPF50+", category: "Bloqueadores", price: 27, size: "25g", badge: "Cushion", desc: "Protector solar en cushion calmante.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 20, brand: "Medicube", name: "Deep Vita C Sun Cream SPF50+", category: "Bloqueadores", price: 25, size: "50ml", badge: "Solar Vit C", desc: "Protector solar con vitamina C.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
 
       // --- BEAUTY OF JOSEON ---
-      { id: 19, brand: "Beauty of Joseon", name: "Green Plum Refreshing Cleanser", category: "Limpiadores", price: 17, size: "100ml", badge: "Favorito", desc: "Gel limpiador suave con ciruela verde.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 20, brand: "Beauty of Joseon", name: "Apricot Blossom Peeling Gel", category: "Limpiadores", price: 16, size: "100ml", badge: "Suave", desc: "Exfoliante enzimático suave con albaricoque.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 21, brand: "Beauty of Joseon", name: "Ginseng Essence Water", category: "Brumas y Tónicos", price: 20, size: "150ml", badge: "Revitalizante", desc: "Esencia de agua con ginseng y niacinamida.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 22, brand: "Beauty of Joseon", name: "Bubble Toner Green Plum + Panthenol", category: "Brumas y Tónicos", price: 21, size: "150ml", badge: "Nuevo", desc: "Tónico en burbujas calmante e hidratante.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 23, brand: "Beauty of Joseon", name: "Glow Serum: Propolis + Niacinamide", category: "Sérums", price: 19, size: "30ml", badge: "Bestseller", desc: "Sérum textura miel con propóleo.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 24, brand: "Beauty of Joseon", name: "Glow Deep Serum: Rice + Alpha-Arbutin", category: "Sérums", price: 19, size: "30ml", badge: "Manchas", desc: "Sérum iluminador de arroz y alfa-arbutina.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 25, brand: "Beauty of Joseon", name: "Dynasty Cream", category: "Hidratantes", price: 24, size: "50ml", badge: "Clásico", desc: "Crema nutritiva de arroz y ginseng.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 26, brand: "Beauty of Joseon", name: "Relief Sun: Rice + Probiotics SPF50+", category: "Bloqueadores", price: 20, size: "50ml", badge: "Top Mundial", desc: "Protector solar icónico sin rastro blanco.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
-      { id: 27, brand: "Beauty of Joseon", name: "Matte Sun Stick: Mugwort + Camellia", category: "Bloqueadores", price: 21, size: "18g", badge: "Reaplicar", desc: "Barra solar matificante con artemisa.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 21, brand: "Beauty of Joseon", name: "Green Plum Refreshing Cleanser", category: "Limpiadores", price: 17, size: "100ml", badge: "Favorito", desc: "Gel limpiador con ciruela verde.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 22, brand: "Beauty of Joseon", name: "Apricot Blossom Peeling Gel", category: "Limpiadores", price: 16, size: "100ml", badge: "Peeling", desc: "Exfoliante enzimático suave.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 23, brand: "Beauty of Joseon", name: "Ginseng Essence Water", category: "Brumas y Tónicos", price: 20, size: "150ml", badge: "Revitaliza", desc: "Esencia de agua con ginseng.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 24, brand: "Beauty of Joseon", name: "Bubble Toner Green Plum", category: "Brumas y Tónicos", price: 21, size: "150ml", badge: "Burbujas", desc: "Tónico en burbujas calmante.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 25, brand: "Beauty of Joseon", name: "Glow Serum: Propolis + Niacinamide", category: "Sérums", price: 19, size: "30ml", badge: "Bestseller", desc: "Sérum textura miel con propóleo.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 26, brand: "Beauty of Joseon", name: "Glow Deep Serum: Rice + Alpha-Arbutin", category: "Sérums", price: 19, size: "30ml", badge: "Manchas", desc: "Sérum iluminador de arroz.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 27, brand: "Beauty of Joseon", name: "Dynasty Cream", category: "Hidratantes", price: 24, size: "50ml", badge: "Clásico", desc: "Crema nutritiva de arroz.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
+      { id: 28, brand: "Beauty of Joseon", name: "Red Bean Refreshing Pore Mask", category: "Mascarillas", price: 21, size: "140ml", badge: "En Barra / Arcilla", desc: "Mascarilla de arcilla con frijol rojo.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
+      { id: 29, brand: "Beauty of Joseon", name: "Relief Sun: Rice + Probiotics SPF50+", category: "Bloqueadores", price: 20, size: "50ml", badge: "Top Mundial", desc: "Protector solar icónico.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 30, brand: "Beauty of Joseon", name: "Matte Sun Stick: Mugwort + Camellia", category: "Bloqueadores", price: 21, size: "18g", badge: "Barra Solar", desc: "Barra solar matificante.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
 
       // --- SKIN1004 ---
-      { id: 28, brand: "SKIN1004", name: "Madagascar Centella Light Cleansing Oil", category: "Limpiadores", price: 22, size: "200ml", badge: "Top Limpieza", desc: "Aceite desmaquillante ligero con centella.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 29, brand: "SKIN1004", name: "Madagascar Centella Ampoule Foam", category: "Limpiadores", price: 18, size: "125ml", badge: "Suave", desc: "Espuma limpiadora de pH balanceado.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 30, brand: "SKIN1004", name: "Madagascar Centella Toning Toner", category: "Brumas y Tónicos", price: 21, size: "210ml", badge: "Exfoliante suave", desc: "Tónico con PHA y centella.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 31, brand: "SKIN1004", name: "Madagascar Centella Hyalu-Cica Brightening Toner", category: "Brumas y Tónicos", price: 23, size: "210ml", badge: "Hidratante", desc: "Tónico hidratante iluminador.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 32, brand: "SKIN1004", name: "Madagascar Centella Ampoule", category: "Sérums", price: 23, size: "100ml", badge: "Calmante Total", desc: "Ampolla pura de centella asiática para reparar.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 33, brand: "SKIN1004", name: "Tone Brightening Capsule Ampoule", category: "Sérums", price: 25, size: "100ml", badge: "Cápsulas", desc: "Ampolla con microcápsulas para manchas.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 34, brand: "SKIN1004", name: "Madagascar Centella Soothing Cream", category: "Hidratantes", price: 22, size: "75ml", badge: "Refrescante", desc: "Crema en gel calmante con centella.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 35, brand: "SKIN1004", name: "Madagascar Centella Hyalu-Cica Water-Fit Sun Serum", category: "Bloqueadores", price: 22, size: "50ml", badge: "El Azul Favorito", desc: "Protector solar textura suero acuoso cero grasoso.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 31, brand: "SKIN1004", name: "Madagascar Centella Light Cleansing Oil", category: "Limpiadores", price: 22, size: "200ml", badge: "Top", desc: "Aceite desmaquillante ligero.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 32, brand: "SKIN1004", name: "Madagascar Centella Ampoule Foam", category: "Limpiadores", price: 18, size: "125ml", badge: "Suave", desc: "Espuma limpiadora de centella.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 33, brand: "SKIN1004", name: "Madagascar Centella Toning Toner", category: "Brumas y Tónicos", price: 21, size: "210ml", badge: "PHA", desc: "Tónico exfoliante suave.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 34, brand: "SKIN1004", name: "Madagascar Centella Hyalu-Cica Toner", category: "Brumas y Tónicos", price: 23, size: "210ml", badge: "Hidratante", desc: "Tónico hidratante iluminador.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 35, brand: "SKIN1004", name: "Madagascar Centella Ampoule", category: "Sérums", price: 23, size: "100ml", badge: "Calmante", desc: "Ampolla pura de centella asiática.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 36, brand: "SKIN1004", name: "Tone Brightening Capsule Ampoule", category: "Sérums", price: 25, size: "100ml", badge: "Cápsulas", desc: "Ampolla con microcápsulas.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 37, brand: "SKIN1004", name: "Madagascar Centella Soothing Cream", category: "Hidratantes", price: 22, size: "75ml", badge: "Gel Crema", desc: "Crema en gel calmante.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
+      { id: 38, brand: "SKIN1004", name: "Madagascar Centella Clearing Clay Stick", category: "Mascarillas", price: 19, size: "38g", badge: "En Barra", desc: "Mascarilla de arcilla en barra.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
+      { id: 39, brand: "SKIN1004", name: "Madagascar Centella Hyalu-Cica Sun Serum", category: "Bloqueadores", price: 22, size: "50ml", badge: "El Azul", desc: "Protector solar acuoso favorito.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 40, brand: "SKIN1004", name: "Madagascar Centella Air-Fit SunCream Plus", category: "Bloqueadores", price: 21, size: "50ml", badge: "Mineral", desc: "Protector solar mineral ligero.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
 
       // --- DR. ALTHEA ---
-      { id: 36, brand: "Dr. Althea", name: "Amino Acid Gentle Cleanser", category: "Limpiadores", price: 20, size: "140ml", badge: "Sensible", desc: "Limpiador facial en gel de aminoácidos ultra suave.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 37, brand: "Dr. Althea", name: "To-Be Youth Facial Cleanser", category: "Limpiadores", price: 21, size: "150ml", badge: "Antiedad", desc: "Limpiador nutritivo con péptidos.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 38, brand: "Dr. Althea", name: "345 Relief Cream Mist", category: "Brumas y Tónicos", price: 25, size: "100ml", badge: "Favorito", desc: "Bruma calmante e hidratante con niacinamida.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 39, brand: "Dr. Althea", name: "Gentle Vitamin C Serum", category: "Sérums", price: 26, size: "30ml", badge: "Luminosidad", desc: "Sérum iluminador suave sin irritación.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 40, brand: "Dr. Althea", name: "Advanced Power Anti-Wrinkle Serum", category: "Sérums", price: 28, size: "30ml", badge: "Péptidos", desc: "Sérum reafirmante para líneas de expresión.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 41, brand: "Dr. Althea", name: "345 Relief Cream", category: "Hidratantes", price: 29, size: "50ml", badge: "Súper Viral", desc: "Crema reparadora de barrera post-acné.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 42, brand: "Dr. Althea", name: "147 Barrier Cream", category: "Hidratantes", price: 29, size: "50ml", badge: "Reparadora", desc: "Crema intensa con azuleno y ceramidas.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 43, brand: "Dr. Althea", name: "Power Relief Sun Cream SPF50+", category: "Bloqueadores", price: 22, size: "50ml", badge: "Calmante", desc: "Protector solar coreano de alta protección y textura ligera.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" }
+      { id: 41, brand: "Dr. Althea", name: "Amino Acid Gentle Cleanser", category: "Limpiadores", price: 20, size: "140ml", badge: "Sensible", desc: "Limpiador facial en gel suave.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 42, brand: "Dr. Althea", name: "To-Be Youth Facial Cleanser", category: "Limpiadores", price: 21, size: "150ml", badge: "Antiedad", desc: "Limpiador nutritivo con péptidos.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 43, brand: "Dr. Althea", name: "345 Relief Cream Mist", category: "Brumas y Tónicos", price: 25, size: "100ml", badge: "Favorito", desc: "Bruma calmante e hidratante.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 44, brand: "Dr. Althea", name: "Resveratrol Enhanced Toner", category: "Brumas y Tónicos", price: 26, size: "200ml", badge: "Antioxidante", desc: "Tónico reparador con resveratrol.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 45, brand: "Dr. Althea", name: "Gentle Vitamin C Serum", category: "Sérums", price: 26, size: "30ml", badge: "Luminosidad", desc: "Sérum iluminador suave.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 46, brand: "Dr. Althea", name: "Advanced Power Anti-Wrinkle Serum", category: "Sérums", price: 28, size: "30ml", badge: "Péptidos", desc: "Sérum reafirmante.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 47, brand: "Dr. Althea", name: "345 Relief Cream", category: "Hidratantes", price: 29, size: "50ml", badge: "Súper Viral", desc: "Crema reparadora post-acné.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
+      { id: 48, brand: "Dr. Althea", name: "Power Relief Sun Cream SPF50+", category: "Bloqueadores", price: 22, size: "50ml", badge: "Calmante", desc: "Protector solar coreano ligero.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" }
     ];
 
     let PRODUCTS = JSON.parse(localStorage.getItem('auraskin_custom_products')) || DEFAULT_PRODUCTS;
     const CATEGORIES = ["Todos", "Limpiadores", "Brumas y Tónicos", "Sérums", "Hidratantes", "Mascarillas", "Bloqueadores"];
     const BRANDS = ["Todas", "Anua", "Medicube", "Beauty of Joseon", "SKIN1004", "Dr. Althea"];
 
-    let selectedCategory = "Todos";
-    let selectedBrand = "Todas";
-    let searchQuery = "";
-    let cart = JSON.parse(localStorage.getItem('auraskin_cart')) || [];
+    let selectedCategory = "Todos", selectedBrand = "Todas", cart = JSON.parse(localStorage.getItem('auraskin_cart')) || [];
 
     function init() { renderCategories(); renderBrands(); renderProducts(); updateCartUI(); }
-
-    function renderCategories() {
-      document.getElementById('categoryTabs').innerHTML = CATEGORIES.map(cat => `
-        <button onclick="filterCategory('${cat}')" class="whitespace-nowrap px-4 py-2 rounded-full text-xs font-medium transition ${cat === selectedCategory ? 'bg-[#24201D] text-white shadow-xs' : 'bg-[#F3EFE8] text-[#6E665F] hover:text-[#24201D]'}">${cat}</button>
-      `).join('');
-    }
-
-    function renderBrands() {
-      document.getElementById('brandPills').innerHTML = BRANDS.map(brand => `
-        <button onclick="filterBrand('${brand}')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full text-[11px] border transition ${brand === selectedBrand ? 'border-[#8C735B] bg-[#8C735B] text-white font-semibold' : 'border-[#E5DFD5] bg-white text-[#6E665F]'}">${brand}</button>
-      `).join('');
-    }
-
-    function filterCategory(cat) { selectedCategory = cat; renderCategories(); renderProducts(); }
-    function filterBrand(brand) { selectedBrand = brand; renderBrands(); renderProducts(); }
+    function renderCategories() { document.getElementById('categoryTabs').innerHTML = CATEGORIES.map(c => `<button onclick="filterCat('${c}')" class="px-4 py-2 rounded-full text-xs font-medium ${c===selectedCategory?'bg-black text-white':'bg-[#F3EFE8] text-gray-600'}">${c}</button>`).join(''); }
+    function renderBrands() { document.getElementById('brandPills').innerHTML = BRANDS.map(b => `<button onclick="filterBrand('${b}')" class="px-3 py-1 rounded-full text-xs border ${b===selectedBrand?'bg-[#8C735B] text-white':'bg-white text-gray-600'}">${b}</button>`).join(''); }
+    function filterCat(c) { selectedCategory = c; renderCategories(); renderProducts(); }
+    function filterBrand(b) { selectedBrand = b; renderBrands(); renderProducts(); }
     function resetFilters() { selectedCategory = "Todos"; selectedBrand = "Todas"; renderCategories(); renderBrands(); renderProducts(); }
 
     function renderProducts() {
-      const grid = document.getElementById('productGrid');
-      const empty = document.getElementById('emptyState');
       const filtered = PRODUCTS.filter(p => (selectedCategory === "Todos" || p.category === selectedCategory) && (selectedBrand === "Todas" || p.brand === selectedBrand));
-
       document.getElementById('productCountLabel').textContent = `Mostrando ${filtered.length} productos`;
-      if (filtered.length === 0) { grid.innerHTML = ""; empty.classList.remove('hidden'); return; }
-      empty.classList.add('hidden');
-
-      grid.innerHTML = filtered.map(p => `
-        <div class="group bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between hover:shadow-md transition">
-          <div>
-            <div onclick="openProductModal(${p.id})" class="relative aspect-square bg-[#F3EFE8] overflow-hidden cursor-pointer">
-              <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-              ${p.badge ? `<span class="absolute top-2.5 left-2.5 bg-[#FAF8F5]/95 text-[#24201D] text-[10px] font-semibold px-2.5 py-1 rounded-full border border-[#E5DFD5]">${p.badge}</span>` : ''}
-            </div>
-            <div class="p-4">
-              <p class="text-[10px] uppercase tracking-widest text-[#8C735B] font-semibold mb-1">${p.brand}</p>
-              <h3 onclick="openProductModal(${p.id})" class="font-editorial text-lg font-semibold text-[#24201D] cursor-pointer hover:text-[#8C735B] line-clamp-2">${p.name}</h3>
-              <p class="text-[11px] text-[#6E665F] mt-1 line-clamp-2">${p.desc}</p>
-            </div>
+      document.getElementById('productGrid').innerHTML = filtered.map(p => `
+        <div class="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between">
+          <div onclick="openModal(${p.id})" class="relative aspect-square bg-[#F3EFE8] cursor-pointer">
+            <img src="${p.img}" class="w-full h-full object-cover" />
+            ${p.badge ? `<span class="absolute top-2 left-2 bg-white text-[10px] font-semibold px-2 py-0.5 rounded-full">${p.badge}</span>`:''}
           </div>
-          <div class="px-4 pb-4 pt-2 flex items-center justify-between border-t border-[#F3EFE8]">
-            <span class="font-semibold text-base text-[#24201D]">$${Number(p.price).toFixed(2)}</span>
-            <button onclick="addToCart(${p.id})" class="bg-[#24201D] hover:bg-[#8C735B] text-white text-xs font-medium px-3.5 py-2 rounded-full transition">+ Agregar</button>
+          <div class="p-3">
+            <p class="text-[10px] uppercase text-[#8C735B] font-bold">${p.brand}</p>
+            <h3 onclick="openModal(${p.id})" class="font-editorial text-lg font-semibold cursor-pointer line-clamp-1">${p.name}</h3>
+          </div>
+          <div class="px-3 pb-3 flex justify-between items-center border-t pt-2">
+            <span class="font-semibold text-sm">$${p.price.toFixed(2)}</span>
+            <button onclick="addToCart(${p.id})" class="bg-black text-white text-xs px-3 py-1.5 rounded-full">+ Agregar</button>
           </div>
         </div>
       `).join('');
     }
 
-    function openProductModal(id) {
-      const p = PRODUCTS.find(item => item.id === id);
-      if (!p) return;
+    function openModal(id) {
+      const p = PRODUCTS.find(i => i.id === id);
       document.getElementById('modalContent').innerHTML = `
-        <div class="bg-[#F3EFE8] aspect-square"><img src="${p.img}" class="w-full h-full object-cover" /></div>
-        <div class="p-6 flex flex-col justify-between space-y-4">
-          <div>
-            <span class="text-xs uppercase tracking-widest text-[#8C735B] font-bold">${p.brand}</span>
-            <h2 class="font-editorial text-2xl font-semibold text-[#24201D] mt-1">${p.name}</h2>
-            <p class="text-xl font-semibold text-[#24201D] mt-2">$${Number(p.price).toFixed(2)} <span class="text-xs text-[#6E665F]">/ ${p.size}</span></p>
-            <p class="text-sm text-[#6E665F] mt-3">${p.desc}</p>
-          </div>
-          <button onclick="addToCart(${p.id}); closeProductModal();" class="w-full bg-[#24201D] text-white py-3 rounded-full text-xs uppercase tracking-widest font-semibold">Agregar a mi Bolsa</button>
-        </div>
-      `;
+        <img src="${p.img}" class="w-full aspect-square object-cover rounded-lg" />
+        <div class="flex flex-col justify-between">
+          <div><span class="text-xs text-[#8C735B] font-bold">${p.brand}</span><h2 class="font-editorial text-2xl font-semibold mt-1">${p.name}</h2><p class="text-lg font-semibold mt-2">$${p.price.toFixed(2)}</p><p class="text-xs text-gray-600 mt-2">${p.desc}</p></div>
+          <button onclick="addToCart(${p.id}); closeProductModal();" class="bg-black text-white py-2.5 rounded-full text-xs font-semibold mt-4">Agregar a mi Bolsa</button>
+        </div>`;
       document.getElementById('productModal').classList.remove('hidden');
     }
     function closeProductModal() { document.getElementById('productModal').classList.add('hidden'); }
 
     function addToCart(id) {
-      const existing = cart.find(item => item.id === id);
-      if (existing) existing.qty += 1; else cart.push({ id, qty: 1 });
-      saveCart(); updateCartUI(); toggleCart(true);
+      const ex = cart.find(i => i.id === id);
+      if (ex) ex.qty++; else cart.push({id, qty: 1});
+      localStorage.setItem('auraskin_cart', JSON.stringify(cart));
+      updateCartUI(); toggleCart(true);
     }
-    function updateQty(id, delta) {
-      const idx = cart.findIndex(item => item.id === id);
-      if (idx !== -1) {
-        cart[idx].qty += delta;
-        if (cart[idx].qty <= 0) cart.splice(idx, 1);
-        saveCart(); updateCartUI();
-      }
-    }
-    function saveCart() { localStorage.setItem('auraskin_cart', JSON.stringify(cart)); }
-
     function updateCartUI() {
-      const badge = document.getElementById('cartCountBadge');
-      const container = document.getElementById('cartItemsContainer');
-      const totalEl = document.getElementById('cartTotal');
-      badge.textContent = cart.reduce((acc, item) => acc + item.qty, 0);
-
-      let subtotal = 0;
-      if (cart.length === 0) {
-        container.innerHTML = `<div class="text-center py-12"><p class="font-editorial text-xl text-[#24201D]">Tu bolsa está vacía</p></div>`;
-      } else {
-        container.innerHTML = cart.map(item => {
-          const p = PRODUCTS.find(prod => prod.id === item.id);
-          if (!p) return '';
-          subtotal += p.price * item.qty;
-          return `
-            <div class="flex gap-3 bg-white p-3 rounded-xl border border-[#E5DFD5]">
-              <img src="${p.img}" class="w-16 h-16 rounded-lg object-cover bg-[#F3EFE8]" />
-              <div class="flex-1 min-w-0">
-                <p class="text-[10px] text-[#8C735B] font-semibold">${p.brand}</p>
-                <p class="text-xs font-semibold text-[#24201D] truncate">${p.name}</p>
-                <div class="flex items-center justify-between mt-2">
-                  <div class="flex items-center border border-[#E5DFD5] rounded-full">
-                    <button onclick="updateQty(${p.id}, -1)" class="px-2.5 py-0.5 text-xs">−</button>
-                    <span class="px-2 text-xs">${item.qty}</span>
-                    <button onclick="updateQty(${p.id}, 1)" class="px-2.5 py-0.5 text-xs">+</button>
-                  </div>
-                  <span class="text-xs font-semibold">$${(p.price * item.qty).toFixed(2)}</span>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join('');
-      }
-      totalEl.textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('cartCountBadge').textContent = cart.reduce((a, b) => a + b.qty, 0);
+      let sub = 0;
+      document.getElementById('cartItemsContainer').innerHTML = cart.map(i => {
+        const p = PRODUCTS.find(pr => pr.id === i.id);
+        sub += p.price * i.qty;
+        return `<div class="flex justify-between items-center bg-gray-50 p-2 rounded"><span class="text-xs">${p.name} x${i.qty}</span><span class="text-xs font-bold">$${(p.price*i.qty).toFixed(2)}</span></div>`;
+      }).join('');
+      document.getElementById('cartTotal').textContent = `$${sub.toFixed(2)}`;
     }
-
-    function toggleCart(open) { document.getElementById('cartDrawer').classList.toggle('hidden', !open); }
+    function toggleCart(o) { document.getElementById('cartDrawer').classList.toggle('hidden', !o); }
 
     function checkoutWhatsApp() {
-      if (cart.length === 0) return alert("Bolsa vacía");
       const name = document.getElementById('customerName').value || "Cliente";
       const city = document.getElementById('customerCity').value || "Caracas";
-      let total = 0;
-      let lines = cart.map((item, idx) => {
-        const p = PRODUCTS.find(prod => prod.id === item.id);
-        total += p.price * item.qty;
-        return `${idx + 1}. *${p.brand}* - ${p.name} x${item.qty} = $${(p.price * item.qty).toFixed(2)}`;
-      }).join('\n');
-
-      const msg = `✨ *PEDIDO AURASKIN* ✨\n👤 *Cliente:* ${name}\n📍 *Zona:* ${city}\n\n${lines}\n\n💰 *Total:* $${total.toFixed(2)}\n\nHola Auraskin, quiero confirmar mi pedido.`;
-      window.open(`https://wa.me/${storeConfig.whatsapp.replace(/\D/g,'')}/?text=${encodeURIComponent(msg)}`, '_blank');
+      let msg = `✨ *PEDIDO AURASKIN* ✨\n👤 ${name}\n📍 ${city}\n\n`;
+      cart.forEach(i => { const p = PRODUCTS.find(pr => pr.id === i.id); msg += `- ${p.name} x${i.qty} ($${p.price*i.qty})\n`; });
+      window.open(`https://wa.me/${storeConfig.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
+    // ADMIN LOGIC
     function openAdminLogin() { document.getElementById('adminLoginModal').classList.remove('hidden'); }
     function verifyAdminPassword() {
-      if (document.getElementById('adminPasswordInput').value === ADMIN_PASS) {
+      if(document.getElementById('adminPasswordInput').value === ADMIN_PASS) {
         document.getElementById('adminLoginModal').classList.add('hidden');
         document.getElementById('adminPasswordInput').value = "";
         openAdminPanel();
-      } else { alert("Contraseña incorrecta"); }
+      } else alert("Contraseña incorrecta");
     }
-
     function openAdminPanel() {
       document.getElementById('adminProductTable').innerHTML = PRODUCTS.map(p => `
-        <div class="bg-[#2A2421] p-4 rounded-xl border border-[#3A322C] flex flex-col md:flex-row gap-4 items-center justify-between">
-          <div class="flex items-center gap-3 w-full md:w-auto">
-            <img src="${p.img}" class="w-14 h-14 rounded-lg object-cover bg-black" />
-            <div>
-              <p class="text-[10px] text-[#A89F95] uppercase font-bold">${p.brand}</p>
-              <input type="text" id="name_${p.id}" value="${p.name}" class="bg-[#1E1A17] border border-[#3A322C] text-white text-xs rounded px-2 py-1 w-64 mt-1" />
-            </div>
+        <div class="bg-[#2A2421] p-3 rounded flex flex-col sm:flex-row gap-3 items-center justify-between text-xs">
+          <div class="flex items-center gap-2 w-full sm:w-auto"><img src="${p.img}" class="w-10 h-10 object-cover rounded"/><input type="text" id="name_${p.id}" value="${p.name}" class="bg-black border border-gray-700 text-white px-2 py-1 rounded w-48"/></div>
+          <div class="flex gap-2 w-full sm:w-auto">
+            <div><label class="text-[9px] text-gray-400">Precio</label><input type="number" id="price_${p.id}" value="${p.price}" class="bg-black border border-gray-700 text-white px-2 py-1 rounded w-16"/></div>
+            <div class="flex-1"><label class="text-[9px] text-gray-400">Foto URL</label><input type="text" id="img_${p.id}" value="${p.img}" class="bg-black border border-gray-700 text-white px-2 py-1 rounded w-36"/></div>
           </div>
-          <div class="flex items-center gap-4 w-full md:w-auto justify-between">
-            <div>
-              <label class="block text-[9px] text-[#A89F95]">PRECIO ($)</label>
-              <input type="number" id="price_${p.id}" value="${p.price}" class="bg-[#1E1A17] border border-[#3A322C] text-white text-xs rounded px-2 py-1 w-20" />
-            </div>
-            <div class="flex-1">
-              <label class="block text-[9px] text-[#A89F95]">URL FOTO</label>
-              <input type="text" id="img_${p.id}" value="${p.img}" class="bg-[#1E1A17] border border-[#3A322C] text-white text-xs rounded px-2 py-1 w-48" />
-            </div>
-          </div>
-        </div>
-      `).join('');
+        </div>`).join('');
       document.getElementById('adminModal').classList.remove('hidden');
     }
-    function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
-
     function saveAdminChanges() {
       PRODUCTS.forEach(p => {
-        const n = document.getElementById(`name_${p.id}`);
-        const pr = document.getElementById(`price_${p.id}`);
-        const im = document.getElementById(`img_${p.id}`);
-        if (n) p.name = n.value;
-        if (pr) p.price = Number(pr.value);
-        if (im) p.img = im.value;
+        const n = document.getElementById(`name_${p.id}`), pr = document.getElementById(`price_${p.id}`), im = document.getElementById(`img_${p.id}`);
+        if(n) p.name = n.value; if(pr) p.price = Number(pr.value); if(im) p.img = im.value;
       });
       localStorage.setItem('auraskin_custom_products', JSON.stringify(PRODUCTS));
-      closeAdminModal();
+      document.getElementById('adminModal').classList.add('hidden');
       renderProducts();
-      alert("¡Cambios guardados con éxito en tu navegador!");
+      alert("¡Guardado con éxito!");
     }
-
     function openSettings() { document.getElementById('settingsModal').classList.remove('hidden'); }
     function closeSettings() {
       const wa = document.getElementById('settingWhatsapp').value.trim();
-      if (wa) { storeConfig.whatsapp = wa; localStorage.setItem('auraskin_wa', wa); }
+      if(wa) { storeConfig.whatsapp = wa; localStorage.setItem('auraskin_wa', wa); }
       document.getElementById('settingsModal').classList.add('hidden');
     }
-
     init();
   </script>
 </body>
