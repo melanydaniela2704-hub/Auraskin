@@ -23,10 +23,12 @@
 </head>
 <body class="antialiased selection:bg-[#8C735B] selection:text-white">
 
-  <!-- Top Announcement Bar -->
-  <div class="bg-[#24201D] text-[#FAF8F5] text-xs tracking-wider py-2 px-6 flex justify-between items-center">
+  <!-- Franja Superior con el Botón del Camerino Backstage bien visible -->
+  <div class="bg-[#24201D] text-[#FAF8F5] text-xs tracking-wider py-2.5 px-6 flex justify-between items-center shadow-md">
     <span>✨ ENVÍOS A TODO EL PAÍS · 100% ORIGINALES ✨</span>
-    <button onclick="openAdminLogin()" class="text-[10px] underline uppercase tracking-widest text-[#E5DFD5] hover:text-white font-bold">🔒 Camerino Backstage (Admin)</button>
+    <button onclick="openAdminLogin()" class="bg-[#8C735B] text-white px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-[#725c48] transition flex items-center gap-1 shadow-xs">
+      🎬 Abrir Camerino Backstage
+    </button>
   </div>
 
   <!-- Header con Logo Centrado -->
@@ -57,7 +59,7 @@
   <section class="bg-[#F3EFE8] border-b border-[#E5DFD5] py-16 text-center px-4">
     <p class="text-xs uppercase tracking-[0.3em] text-[#8C735B] font-semibold mb-2">Curaduría K-Beauty</p>
     <h1 class="font-editorial text-4xl sm:text-6xl font-semibold text-[#24201D]">The Glow Ritual</h1>
-    <p class="text-xs sm:text-sm text-[#6E665F] max-w-md mx-auto mt-2">Variedad completa y equilibrada de limpiadores, tónicos, sérums, mascarillas y protectores solares de tus marcas favoritas.</p>
+    <p class="text-xs sm:text-sm text-[#6E665F] max-w-md mx-auto mt-2">Haruharu Wonder, Centellian24 Madeca Cream, Shots, Anua, Medicube y mucho más.</p>
   </section>
 
   <!-- Catálogo -->
@@ -99,12 +101,15 @@
   </div>
 
   <!-- CAMERINO BACKSTAGE MODAL (ADMIN) -->
-  <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-4">
+  <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-4 z-55">
     <div class="bg-[#1E1A17] text-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
       <div class="flex justify-between items-center border-b border-[#3A322C] pb-4 mb-4">
-        <h2 class="font-editorial text-2xl text-amber-100">🎬 Camerino Backstage — Editar Precios y Fotos</h2>
+        <div>
+          <h2 class="font-editorial text-2xl text-amber-100">🎬 Camerino Backstage — Editar Precios y Fotos</h2>
+          <p class="text-xs text-gray-400 mt-1">Modifica lo que quieras y haz clic en Guardar para ver los cambios al instante.</p>
+        </div>
         <div class="flex gap-2">
-          <button onclick="saveAdminChanges()" class="bg-[#25D366] px-4 py-1.5 rounded text-xs font-bold">Guardar</button>
+          <button onclick="saveAdminChanges()" class="bg-[#25D366] px-4 py-1.5 rounded text-xs font-bold text-black">💾 Guardar</button>
           <button onclick="document.getElementById('adminModal').classList.add('hidden')" class="bg-red-600 px-3 py-1.5 rounded text-xs">Cerrar</button>
         </div>
       </div>
@@ -113,20 +118,21 @@
   </div>
 
   <!-- Login Admin Modal -->
-  <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-black/60 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
-      <h3 class="text-xl font-bold">Contraseña del Camerino</h3>
-      <input type="password" id="adminPasswordInput" placeholder="Contraseña..." class="w-full border rounded px-3 py-2 text-sm" />
+  <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-black/60 flex items-center justify-center p-4 z-60">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4 text-black">
+      <h3 class="text-xl font-bold font-editorial">🔒 Contraseña del Camerino</h3>
+      <p class="text-xs text-gray-600">Introduce tu clave secreta para acceder al panel de edición:</p>
+      <input type="password" id="adminPasswordInput" placeholder="Contraseña..." class="w-full border rounded px-3 py-2 text-sm outline-none focus:border-black" />
       <div class="flex justify-end gap-2">
-        <button onclick="document.getElementById('adminLoginModal').classList.add('hidden')" class="text-xs text-gray-500">Cancelar</button>
-        <button onclick="verifyAdminPassword()" class="bg-black text-white px-4 py-1.5 rounded text-xs">Entrar</button>
+        <button onclick="document.getElementById('adminLoginModal').classList.add('hidden')" class="text-xs text-gray-500 px-3 py-2">Cancelar</button>
+        <button onclick="verifyAdminPassword()" class="bg-black text-white px-5 py-2 rounded-full text-xs font-semibold">Entrar</button>
       </div>
     </div>
   </div>
 
   <!-- Settings Modal (WhatsApp) -->
   <div id="settingsModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-sm w-full p-6 space-y-3">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 space-y-3 text-black">
       <h3 class="font-bold">Número de WhatsApp</h3>
       <input type="text" id="settingWhatsapp" class="w-full border rounded px-3 py-2 text-sm" placeholder="Ej: 584121234567" />
       <div class="flex justify-end"><button onclick="closeSettings()" class="bg-black text-white px-4 py-1.5 rounded text-xs">Guardar</button></div>
@@ -138,70 +144,50 @@
     const ADMIN_PASS = "auraskin2026";
     let storeConfig = { whatsapp: localStorage.getItem('auraskin_wa') || DEFAULT_WHATSAPP };
 
-    // Catálogo robusto completo con múltiples limpiadores, tónicos, sérums, cremas, mascarillas en barra/hidrogel y bloqueadores por marca.
+    // Catálogo nutrido con Haruharu Wonder, Centellian24 Madeca Cream, Shots, Anua, Medicube, etc.
     const DEFAULT_PRODUCTS = [
+      // --- HARUHARU WONDER ---
+      { id: 1, brand: "Haruharu Wonder", name: "Black Rice Hyaluronic Toner (Fragrance Free)", category: "Brumas y Tónicos", price: 22, size: "300ml", badge: "Viral", desc: "Tónico de arroz negro fermentado altamente hidratante.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 2, brand: "Haruharu Wonder", name: "Black Rice Moisture 5.5 Soft Cleansing Gel", category: "Limpiadores", price: 18, size: "100ml", badge: "Suave", desc: "Gel limpiador facial con pH balanceado y extracto de arroz negro.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 3, brand: "Haruharu Wonder", name: "Black Rice Bakuchiol Eye Cream", category: "Sérums", price: 24, size: "20ml", badge: "Antiedad", desc: "Contorno de ojos con bakuchiol natural alternativo al retinol.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 4, brand: "Haruharu Wonder", name: "Black Rice Moisture Airy sunscreen SPF50+", category: "Bloqueadores", price: 21, size: "50ml", badge: "Favorito", desc: "Bloqueador solar ultraligero de rápida absorción.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+
+      // --- CENTELLIAN24 (MADECA CREAM & SHOTS) ---
+      { id: 5, brand: "Centellian24", name: "Madeca Cream Time Reverse", category: "Hidratantes", price: 32, size: "50ml", badge: "Bestseller", desc: "La icónica crema coreana regeneradora con TECA y centella.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
+      { id: 6, brand: "Centellian24", name: "Madeca Micro Peel Shot Ampoule", category: "Sérums", price: 34, size: "30ml", badge: "Efecto Shot", desc: "Ampolla de tratamiento intensivo con micropartículas de absorción.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 7, brand: "Centellian24", name: "Madeca Derma Balancing Cleanser", category: "Limpiadores", price: 20, size: "150ml", badge: "Dermatológico", desc: "Limpiador facial dermoprotector con centella asiática.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 8, brand: "Centellian24", name: "Madeca Aqua Shield Sun Protector SPF50+", category: "Bloqueadores", price: 24, size: "50ml", badge: "Derma Sun", desc: "Protector solar hidratante con tecnología Madeca.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+
       // --- ANUA ---
-      { id: 1, brand: "Anua", name: "Heartleaf Pore Control Cleansing Oil", category: "Limpiadores", price: 24, size: "200ml", badge: "Viral", desc: "Aceite limpiador para puntos negros.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 2, brand: "Anua", name: "Heartleaf Quercetinol Pore Deep Cleansing Foam", category: "Limpiadores", price: 21, size: "150ml", badge: "Top", desc: "Espuma limpiadora profunda.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 3, brand: "Anua", name: "Heartleaf 77% Soothing Toner", category: "Brumas y Tónicos", price: 24, size: "250ml", badge: "Imprescindible", desc: "Tónico calmante ultraligero.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 4, brand: "Anua", name: "Heartleaf 77 Clear Pad", category: "Brumas y Tónicos", price: 26, size: "70 discos", badge: "Discos", desc: "Discos tónicos calmantes.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 5, brand: "Anua", name: "Peach 70 Niacin Serum", category: "Sérums", price: 28, size: "30ml", badge: "Glass Skin", desc: "Sérum iluminador con melocotón.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 6, brand: "Anua", name: "Dark Spot Correcting Serum", category: "Sérums", price: 30, size: "30ml", badge: "Manchas", desc: "Sérum para tono disparejo.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 7, brand: "Anua", name: "Heartleaf 70 Soothing Cream", category: "Hidratantes", price: 29, size: "50ml", badge: "Calmante", desc: "Crema hidratante ligera.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 8, brand: "Anua", name: "Heartleaf Clay Mask Stick", category: "Mascarillas", price: 20, size: "50g", badge: "En Barra", desc: "Mascarilla de arcilla en barra práctica.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
-      { id: 9, brand: "Anua", name: "Heartleaf Silky Moisture Sun Cream SPF50+", category: "Bloqueadores", price: 23, size: "50ml", badge: "Solar", desc: "Protector solar hidratante.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
-      { id: 10, brand: "Anua", name: "Airy Sun Cream SPF50+", category: "Bloqueadores", price: 22, size: "50ml", badge: "Toque Seco", desc: "Protector solar acabado ligero.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 9, brand: "Anua", name: "Heartleaf Pore Control Cleansing Oil", category: "Limpiadores", price: 24, size: "200ml", badge: "Viral TikTok", desc: "Aceite limpiador número 1 para puntos negros.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 10, brand: "Anua", name: "Heartleaf 77% Soothing Toner", category: "Brumas y Tónicos", price: 24, size: "250ml", badge: "Imprescindible", desc: "Tónico calmante ultraligero que equilibra el pH.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
+      { id: 11, brand: "Anua", name: "Peach 70 Niacin Serum", category: "Sérums", price: 28, size: "30ml", badge: "Glass Skin", desc: "Sérum iluminador con melocotón y niacinamida.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 12, brand: "Anua", name: "Heartleaf Clay Mask Stick", category: "Mascarillas", price: 20, size: "50g", badge: "En Barra", desc: "Mascarilla de arcilla en barra práctica.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
+      { id: 13, brand: "Anua", name: "Heartleaf Silky Moisture Sun Cream SPF50+", category: "Bloqueadores", price: 23, size: "50ml", badge: "Solar", desc: "Protector solar hidratante con heartleaf.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
 
       // --- MEDICUBE ---
-      { id: 11, brand: "Medicube", name: "Red Body Scrub & Wash (Corporal)", category: "Limpiadores", price: 29, size: "400ml", badge: "Corporal", desc: "Exfoliante para brotes en espalda.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 12, brand: "Medicube", name: "PDRN Pink Collagen Gel Cleanser", category: "Limpiadores", price: 28, size: "150ml", badge: "Glass Skin", desc: "Limpiador facial con colágeno.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 13, brand: "Medicube", name: "PDRN Pink Collagen Glow Jelly Mist", category: "Brumas y Tónicos", price: 27, size: "100ml", badge: "Viral", desc: "Bruma bifásica de gelatina.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 14, brand: "Medicube", name: "Deep Vita C Ampoule Toner", category: "Brumas y Tónicos", price: 26, size: "140ml", badge: "Vitamina C", desc: "Tónico iluminador.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 15, brand: "Medicube", name: "PDRN Pink Peptide Serum", category: "Sérums", price: 31, size: "30ml", badge: "Top", desc: "Sérum reafirmante con PDRN.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 16, brand: "Medicube", name: "Triple Collagen Serum 2.0", category: "Sérums", price: 33, size: "45ml", badge: "Firmeza", desc: "Sérum concentrado de colágeno.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 17, brand: "Medicube", name: "Collagen Jelly Cream", category: "Hidratantes", price: 31, size: "110ml", badge: "Relleno", desc: "Crema gelatina con colágeno.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 18, brand: "Medicube", name: "PDRN Pink Collagen Gel Mask", category: "Mascarillas", price: 27, size: "4 und", badge: "Hidrogel", desc: "Mascarilla rosa de colágeno.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
-      { id: 19, brand: "Medicube", name: "Red Clear Cica Sun Cushion SPF50+", category: "Bloqueadores", price: 27, size: "25g", badge: "Cushion", desc: "Protector solar en cushion calmante.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
-      { id: 20, brand: "Medicube", name: "Deep Vita C Sun Cream SPF50+", category: "Bloqueadores", price: 25, size: "50ml", badge: "Solar Vit C", desc: "Protector solar con vitamina C.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 14, brand: "Medicube", name: "Red Body Scrub & Wash (Corporal)", category: "Limpiadores", price: 29, size: "400ml", badge: "Corporal", desc: "Exfoliante para brotes en la espalda.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 15, brand: "Medicube", name: "PDRN Pink Collagen Gel Cleanser", category: "Limpiadores", price: 28, size: "150ml", badge: "Glass Skin", desc: "Limpiador facial con colágeno y PDRN.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 16, brand: "Medicube", name: "PDRN Pink Peptide Serum", category: "Sérums", price: 31, size: "30ml", badge: "Top", desc: "Sérum reafirmante con PDRN y péptidos.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 17, brand: "Medicube", name: "Collagen Jelly Cream", category: "Hidratantes", price: 31, size: "110ml", badge: "Relleno", desc: "Crema en gelatina transparente con colágeno.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
+      { id: 18, brand: "Medicube", name: "PDRN Pink Collagen Gel Mask", category: "Mascarillas", price: 27, size: "4 und", badge: "Hidrogel", desc: "Mascarilla rosa de colágeno nocturna.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
 
       // --- BEAUTY OF JOSEON ---
-      { id: 21, brand: "Beauty of Joseon", name: "Green Plum Refreshing Cleanser", category: "Limpiadores", price: 17, size: "100ml", badge: "Favorito", desc: "Gel limpiador con ciruela verde.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 22, brand: "Beauty of Joseon", name: "Apricot Blossom Peeling Gel", category: "Limpiadores", price: 16, size: "100ml", badge: "Peeling", desc: "Exfoliante enzimático suave.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 23, brand: "Beauty of Joseon", name: "Ginseng Essence Water", category: "Brumas y Tónicos", price: 20, size: "150ml", badge: "Revitaliza", desc: "Esencia de agua con ginseng.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 24, brand: "Beauty of Joseon", name: "Bubble Toner Green Plum", category: "Brumas y Tónicos", price: 21, size: "150ml", badge: "Burbujas", desc: "Tónico en burbujas calmante.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 25, brand: "Beauty of Joseon", name: "Glow Serum: Propolis + Niacinamide", category: "Sérums", price: 19, size: "30ml", badge: "Bestseller", desc: "Sérum textura miel con propóleo.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 26, brand: "Beauty of Joseon", name: "Glow Deep Serum: Rice + Alpha-Arbutin", category: "Sérums", price: 19, size: "30ml", badge: "Manchas", desc: "Sérum iluminador de arroz.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 27, brand: "Beauty of Joseon", name: "Dynasty Cream", category: "Hidratantes", price: 24, size: "50ml", badge: "Clásico", desc: "Crema nutritiva de arroz.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 28, brand: "Beauty of Joseon", name: "Red Bean Refreshing Pore Mask", category: "Mascarillas", price: 21, size: "140ml", badge: "En Barra / Arcilla", desc: "Mascarilla de arcilla con frijol rojo.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
-      { id: 29, brand: "Beauty of Joseon", name: "Relief Sun: Rice + Probiotics SPF50+", category: "Bloqueadores", price: 20, size: "50ml", badge: "Top Mundial", desc: "Protector solar icónico.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
-      { id: 30, brand: "Beauty of Joseon", name: "Matte Sun Stick: Mugwort + Camellia", category: "Bloqueadores", price: 21, size: "18g", badge: "Barra Solar", desc: "Barra solar matificante.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
+      { id: 19, brand: "Beauty of Joseon", name: "Green Plum Refreshing Cleanser", category: "Limpiadores", price: 17, size: "100ml", badge: "Favorito", desc: "Gel limpiador suave con ciruela verde.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 20, brand: "Beauty of Joseon", name: "Glow Serum: Propolis + Niacinamide", category: "Sérums", price: 19, size: "30ml", badge: "Bestseller", desc: "Sérum textura miel con propóleo.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 21, brand: "Beauty of Joseon", name: "Red Bean Refreshing Pore Mask", category: "Mascarillas", price: 21, size: "140ml", badge: "Arcilla", desc: "Mascarilla de arcilla con frijol rojo.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
+      { id: 22, brand: "Beauty of Joseon", name: "Relief Sun: Rice + Probiotics SPF50+", category: "Bloqueadores", price: 20, size: "50ml", badge: "Top Mundial", desc: "Protector solar icónico sin rastro blanco.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
 
       // --- SKIN1004 ---
-      { id: 31, brand: "SKIN1004", name: "Madagascar Centella Light Cleansing Oil", category: "Limpiadores", price: 22, size: "200ml", badge: "Top", desc: "Aceite desmaquillante ligero.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 32, brand: "SKIN1004", name: "Madagascar Centella Ampoule Foam", category: "Limpiadores", price: 18, size: "125ml", badge: "Suave", desc: "Espuma limpiadora de centella.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 33, brand: "SKIN1004", name: "Madagascar Centella Toning Toner", category: "Brumas y Tónicos", price: 21, size: "210ml", badge: "PHA", desc: "Tónico exfoliante suave.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 34, brand: "SKIN1004", name: "Madagascar Centella Hyalu-Cica Toner", category: "Brumas y Tónicos", price: 23, size: "210ml", badge: "Hidratante", desc: "Tónico hidratante iluminador.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 35, brand: "SKIN1004", name: "Madagascar Centella Ampoule", category: "Sérums", price: 23, size: "100ml", badge: "Calmante", desc: "Ampolla pura de centella asiática.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 36, brand: "SKIN1004", name: "Tone Brightening Capsule Ampoule", category: "Sérums", price: 25, size: "100ml", badge: "Cápsulas", desc: "Ampolla con microcápsulas.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 37, brand: "SKIN1004", name: "Madagascar Centella Soothing Cream", category: "Hidratantes", price: 22, size: "75ml", badge: "Gel Crema", desc: "Crema en gel calmante.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 38, brand: "SKIN1004", name: "Madagascar Centella Clearing Clay Stick", category: "Mascarillas", price: 19, size: "38g", badge: "En Barra", desc: "Mascarilla de arcilla en barra.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
-      { id: 39, brand: "SKIN1004", name: "Madagascar Centella Hyalu-Cica Sun Serum", category: "Bloqueadores", price: 22, size: "50ml", badge: "El Azul", desc: "Protector solar acuoso favorito.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
-      { id: 40, brand: "SKIN1004", name: "Madagascar Centella Air-Fit SunCream Plus", category: "Bloqueadores", price: 21, size: "50ml", badge: "Mineral", desc: "Protector solar mineral ligero.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" },
-
-      // --- DR. ALTHEA ---
-      { id: 41, brand: "Dr. Althea", name: "Amino Acid Gentle Cleanser", category: "Limpiadores", price: 20, size: "140ml", badge: "Sensible", desc: "Limpiador facial en gel suave.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 42, brand: "Dr. Althea", name: "To-Be Youth Facial Cleanser", category: "Limpiadores", price: 21, size: "150ml", badge: "Antiedad", desc: "Limpiador nutritivo con péptidos.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
-      { id: 43, brand: "Dr. Althea", name: "345 Relief Cream Mist", category: "Brumas y Tónicos", price: 25, size: "100ml", badge: "Favorito", desc: "Bruma calmante e hidratante.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 44, brand: "Dr. Althea", name: "Resveratrol Enhanced Toner", category: "Brumas y Tónicos", price: 26, size: "200ml", badge: "Antioxidante", desc: "Tónico reparador con resveratrol.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80" },
-      { id: 45, brand: "Dr. Althea", name: "Gentle Vitamin C Serum", category: "Sérums", price: 26, size: "30ml", badge: "Luminosidad", desc: "Sérum iluminador suave.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 46, brand: "Dr. Althea", name: "Advanced Power Anti-Wrinkle Serum", category: "Sérums", price: 28, size: "30ml", badge: "Péptidos", desc: "Sérum reafirmante.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
-      { id: 47, brand: "Dr. Althea", name: "345 Relief Cream", category: "Hidratantes", price: 29, size: "50ml", badge: "Súper Viral", desc: "Crema reparadora post-acné.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80" },
-      { id: 48, brand: "Dr. Althea", name: "Power Relief Sun Cream SPF50+", category: "Bloqueadores", price: 22, size: "50ml", badge: "Calmante", desc: "Protector solar coreano ligero.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" }
+      { id: 23, brand: "SKIN1004", name: "Madagascar Centella Light Cleansing Oil", category: "Limpiadores", price: 22, size: "200ml", badge: "Top", desc: "Aceite desmaquillante ligero con centella.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80" },
+      { id: 24, brand: "SKIN1004", name: "Madagascar Centella Ampoule", category: "Sérums", price: 23, size: "100ml", badge: "Calmante", desc: "Ampolla pura de centella asiática para reparar.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" },
+      { id: 25, brand: "SKIN1004", name: "Madagascar Centella Clearing Clay Stick", category: "Mascarillas", price: 19, size: "38g", badge: "En Barra", desc: "Mascarilla de arcilla en barra práctica.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80" },
+      { id: 26, brand: "SKIN1004", name: "Madagascar Centella Hyalu-Cica Sun Serum", category: "Bloqueadores", price: 22, size: "50ml", badge: "El Azul", desc: "Protector solar textura suero acuoso cero grasoso.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80" }
     ];
 
     let PRODUCTS = JSON.parse(localStorage.getItem('auraskin_custom_products')) || DEFAULT_PRODUCTS;
     const CATEGORIES = ["Todos", "Limpiadores", "Brumas y Tónicos", "Sérums", "Hidratantes", "Mascarillas", "Bloqueadores"];
-    const BRANDS = ["Todas", "Anua", "Medicube", "Beauty of Joseon", "SKIN1004", "Dr. Althea"];
+    const BRANDS = ["Todas", "Haruharu Wonder", "Centellian24", "Anua", "Medicube", "Beauty of Joseon", "SKIN1004"];
 
     let selectedCategory = "Todos", selectedBrand = "Todas", cart = JSON.parse(localStorage.getItem('auraskin_cart')) || [];
 
@@ -216,10 +202,10 @@
       const filtered = PRODUCTS.filter(p => (selectedCategory === "Todos" || p.category === selectedCategory) && (selectedBrand === "Todas" || p.brand === selectedBrand));
       document.getElementById('productCountLabel').textContent = `Mostrando ${filtered.length} productos`;
       document.getElementById('productGrid').innerHTML = filtered.map(p => `
-        <div class="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between">
+        <div class="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-xs">
           <div onclick="openModal(${p.id})" class="relative aspect-square bg-[#F3EFE8] cursor-pointer">
             <img src="${p.img}" class="w-full h-full object-cover" />
-            ${p.badge ? `<span class="absolute top-2 left-2 bg-white text-[10px] font-semibold px-2 py-0.5 rounded-full">${p.badge}</span>`:''}
+            ${p.badge ? `<span class="absolute top-2 left-2 bg-white/90 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-gray-200">${p.badge}</span>`:''}
           </div>
           <div class="p-3">
             <p class="text-[10px] uppercase text-[#8C735B] font-bold">${p.brand}</p>
@@ -227,7 +213,7 @@
           </div>
           <div class="px-3 pb-3 flex justify-between items-center border-t pt-2">
             <span class="font-semibold text-sm">$${p.price.toFixed(2)}</span>
-            <button onclick="addToCart(${p.id})" class="bg-black text-white text-xs px-3 py-1.5 rounded-full">+ Agregar</button>
+            <button onclick="addToCart(${p.id})" class="bg-black text-white text-xs px-3 py-1.5 rounded-full hover:bg-gray-800 transition">+ Agregar</button>
           </div>
         </div>
       `).join('');
@@ -271,7 +257,7 @@
       window.open(`https://wa.me/${storeConfig.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // ADMIN LOGIC
+    // ADMIN LOGIC (CAMERINO BACKSTAGE)
     function openAdminLogin() { document.getElementById('adminLoginModal').classList.remove('hidden'); }
     function verifyAdminPassword() {
       if(document.getElementById('adminPasswordInput').value === ADMIN_PASS) {
@@ -282,7 +268,7 @@
     }
     function openAdminPanel() {
       document.getElementById('adminProductTable').innerHTML = PRODUCTS.map(p => `
-        <div class="bg-[#2A2421] p-3 rounded flex flex-col sm:flex-row gap-3 items-center justify-between text-xs">
+        <div class="bg-[#2A2421] p-3 rounded flex flex-col sm:flex-row gap-3 items-center justify-between text-xs border border-gray-700">
           <div class="flex items-center gap-2 w-full sm:w-auto"><img src="${p.img}" class="w-10 h-10 object-cover rounded"/><input type="text" id="name_${p.id}" value="${p.name}" class="bg-black border border-gray-700 text-white px-2 py-1 rounded w-48"/></div>
           <div class="flex gap-2 w-full sm:w-auto">
             <div><label class="text-[9px] text-gray-400">Precio</label><input type="number" id="price_${p.id}" value="${p.price}" class="bg-black border border-gray-700 text-white px-2 py-1 rounded w-16"/></div>
@@ -299,7 +285,7 @@
       localStorage.setItem('auraskin_custom_products', JSON.stringify(PRODUCTS));
       document.getElementById('adminModal').classList.add('hidden');
       renderProducts();
-      alert("¡Guardado con éxito!");
+      alert("¡Cambios guardados con éxito!");
     }
     function openSettings() { document.getElementById('settingsModal').classList.remove('hidden'); }
     function closeSettings() {
