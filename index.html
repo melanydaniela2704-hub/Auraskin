@@ -3,731 +3,824 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AURASKIN | K-Beauty Curated Store</title>
+  <title>Aura Skin | K-Beauty & Skincare en Caracas</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-cream: #FAF8F5;
-      --bg-sand: #F3EFE8;
-      --text-ink: #24201D;
-      --text-muted: #6E665F;
-      --accent-earth: #8C735B;
-      --border-soft: #E5DFD5;
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FDFBF7;
+      color: #3A3532;
     }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-cream); color: var(--text-ink); overflow-x: hidden; }
-    h1, h2, h3, .font-editorial { font-family: 'Cormorant Garamond', serif; }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    h1, h2, h3, .font-serif-brand {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </head>
-<body class="antialiased selection:bg-[#8C735B] selection:text-white">
+<body class="min-h-screen flex flex-col">
 
-  <!-- ===================================================================== -->
-  <!-- VISTA 1: TIENDA PÚBLICA AURASKIN                                      -->
-  <!-- ===================================================================== -->
-  <div id="storefrontView">
-    <!-- Franja Superior -->
-    <div class="bg-[#24201D] text-[#FAF8F5] text-xs tracking-wider py-2.5 px-6 flex justify-between items-center">
-      <span>✨ ENVÍOS A TODO EL PAÍS · 100% ORIGINALES ✨</span>
-      <button onclick="openAdminLogin()" class="bg-[#8C735B] text-white px-3.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-widest hover:bg-[#725c48] transition flex items-center gap-1.5">
-        <span>✦</span> Camerino Backstage
+  <!-- Barra de anuncio superior -->
+  <div class="bg-[#8C735B] text-[#FDFBF7] text-[11px] tracking-widest uppercase text-center py-2 px-4">
+    Envíos en Caracas y toda Venezuela • Productos 100% Originales
+  </div>
+
+  <!-- Navegación Principal (Sin botón de Camerino arriba) -->
+  <header class="sticky top-0 z-40 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#E5DFD5]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <!-- Logo -->
+      <a href="#" onclick="resetFilters()" class="flex flex-col items-center md:items-start">
+        <span class="font-serif-brand text-2xl sm:text-3xl font-semibold tracking-wider text-[#3A3532]">AURA SKIN</span>
+        <span class="text-[10px] tracking-[0.25em] text-[#8C735B] uppercase -mt-1">Curated Skincare</span>
+      </a>
+
+      <!-- Barra de búsqueda con sugerencias automáticas -->
+      <div class="relative w-full md:w-96">
+        <div class="relative flex items-center">
+          <svg class="w-4 h-4 text-[#8C735B] absolute left-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <input 
+            type="text" 
+            id="searchInput" 
+            autocomplete="off"
+            placeholder="Buscar producto, marca o ingrediente..." 
+            class="w-full bg-[#F5F1EA] border border-[#E5DFD5] rounded-full pl-10 pr-8 py-2 text-xs text-[#3A3532] placeholder-[#9B9188] focus:outline-none focus:border-[#8C735B] transition-colors"
+          />
+          <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 text-[#9B9188] hover:text-[#3A3532]">
+            ✕
+          </button>
+        </div>
+        <!-- Desplegable de sugerencias en tiempo real -->
+        <div id="searchSuggestions" class="hidden absolute left-0 right-0 mt-1.5 bg-white border border-[#E5DFD5] rounded-2xl shadow-lg overflow-hidden z-50 max-h-72 overflow-y-auto"></div>
+      </div>
+
+      <!-- Botón Carrito -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleCart()" class="relative flex items-center gap-2 bg-[#3A3532] hover:bg-[#524B47] text-[#FDFBF7] px-4 py-2 rounded-full text-xs font-medium transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+          <span>Bolsa</span>
+          <span id="cartCount" class="bg-[#8C735B] text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full">0</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Filtros dinámicos de Secciones / Categorías -->
+    <div class="border-t border-[#EFECE6] bg-[#FAF8F4]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-2 overflow-x-auto no-scrollbar" id="categoryFilters">
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Minimalista -->
+  <section class="bg-[#F5F1EA] border-b border-[#E5DFD5]">
+    <div class="max-w-6xl mx-auto px-6 py-10 sm:py-14 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="max-w-xl text-center md:text-left space-y-3">
+        <span class="text-[11px] uppercase tracking-[0.2em] text-[#8C735B] font-semibold">Selección Dermatológica & K-Beauty</span>
+        <h1 class="text-3xl sm:text-5xl font-semibold text-[#3A3532] leading-tight">
+          Tu ritual diario para una piel luminosa y saludable.
+        </h1>
+        <p class="text-xs sm:text-sm text-[#6E665F] leading-relaxed">
+          Explora nuestra curaduría de fórmulas ligeras, protectores solares y tratamientos esenciales disponibles en Caracas.
+        </p>
+      </div>
+      <!-- Filtro rápido de Marcas -->
+      <div class="w-full md:w-auto bg-white/80 backdrop-blur border border-[#E5DFD5] rounded-2xl p-4 sm:p-5 shadow-sm">
+        <p class="text-[11px] uppercase tracking-wider text-[#8C735B] font-semibold mb-2.5">Filtrar por Marca</p>
+        <div id="brandFilters" class="flex flex-wrap gap-1.5 max-w-xs">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catálogo de Productos -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10">
+    <div class="flex items-center justify-between mb-6">
+      <h2 id="catalogTitle" class="text-2xl font-semibold text-[#3A3532]">Todos los Productos</h2>
+      <span id="productCounter" class="text-xs text-[#8C735B]"></span>
+    </div>
+
+    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    </div>
+
+    <div id="emptyState" class="hidden text-center py-16 space-y-3">
+      <p class="font-serif-brand text-2xl text-[#6E665F]">No encontramos productos con ese filtro</p>
+      <button onclick="resetFilters()" class="text-xs text-[#8C735B] underline underline-offset-4 hover:text-[#3A3532]">
+        Ver todo el catálogo
       </button>
     </div>
+  </main>
 
-    <!-- Header con Logo Centrado -->
-    <header class="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E5DFD5]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <nav class="hidden md:flex items-center gap-6 text-xs uppercase tracking-[0.15em] text-[#24201D] font-medium">
-          <a href="#catalogo" class="hover:text-[#8C735B] transition">Shop</a>
-          <button onclick="filterCategory('Limpiadores')" class="hover:text-[#8C735B] transition">Limpiadores</button>
-          <button onclick="filterCategory('Sérums')" class="hover:text-[#8C735B] transition">Sérums</button>
-          <button onclick="filterCategory('Mascarillas')" class="hover:text-[#8C735B] transition">Mascarillas</button>
-        </nav>
-
-        <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
-          <a href="#" onclick="resetFilters()" class="font-editorial text-3xl sm:text-4xl tracking-[0.25em] font-bold text-[#24201D]">AURASKIN</a>
-        </div>
-
-        <div class="flex items-center gap-3 ml-auto">
-          <button onclick="openSettings()" title="Configurar WhatsApp" class="p-2.5 rounded-full hover:bg-[#F3EFE8] border border-[#E5DFD5] text-xs flex items-center gap-1.5 text-[#24201D]">
-            <span>💬</span><span class="hidden sm:inline font-medium">WhatsApp</span>
-          </button>
-          <button onclick="toggleCart(true)" class="relative p-2.5 rounded-full bg-[#24201D] text-white hover:bg-[#3d3631] flex items-center gap-2 px-4 transition">
-            <span class="text-xs font-medium">Bolsa</span>
-            <span id="cartCountBadge" class="bg-[#FAF8F5] text-[#24201D] text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Hero Minimalista -->
-    <section class="bg-[#F3EFE8] border-b border-[#E5DFD5] py-16 text-center px-4">
-      <p class="text-xs uppercase tracking-[0.3em] text-[#8C735B] font-semibold mb-2">Curaduría K-Beauty</p>
-      <h1 class="font-editorial text-4xl sm:text-6xl font-semibold text-[#24201D]">The Glow Ritual</h1>
-      <p class="text-xs sm:text-sm text-[#6E665F] max-w-md mx-auto mt-2">Haruharu Wonder, Centellian24 Madeca Cream, Shots, Anua, Medicube y mucho más.</p>
-    </section>
-
-    <!-- Catálogo -->
-    <main id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div class="mb-6 flex items-center justify-between">
-        <h2 class="text-2xl sm:text-3xl font-semibold">Colección Completa</h2>
-        <span id="productCountLabel" class="text-xs text-[#6E665F]">Mostrando productos</span>
-      </div>
-      <div id="categoryTabs" class="flex gap-2 overflow-x-auto no-scrollbar pb-2 mb-4"></div>
-      <div id="brandPills" class="flex gap-2 overflow-x-auto no-scrollbar pb-2 mb-8"></div>
-
-      <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-[#F3EFE8] border-t border-[#E5DFD5] py-10 px-6 mt-12 text-center">
-      <span class="font-editorial text-2xl tracking-[0.2em] font-semibold text-[#24201D]">AURASKIN</span>
-      <p class="text-xs text-[#6E665F] mt-1">Skincare coreano seleccionado · 100% Original</p>
-    </footer>
-  </div>
-
-  <!-- ===================================================================== -->
-  <!-- VISTA 2: PANEL DE CONTROL A PANTALLA COMPLETA (INSPIRADO EN HAARU)    -->
-  <!-- ===================================================================== -->
-  <div id="adminFullPage" class="hidden min-h-screen bg-[#FAF8F5] text-[#24201D]">
-    
-    <!-- Top Header del Panel de Control -->
-    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#E5DFD5] px-6 py-4 shadow-2xs">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-        
-        <!-- Logo y Badge EN VIVO -->
-        <div class="flex items-center gap-4">
-          <span class="font-editorial text-2xl sm:text-3xl tracking-[0.2em] font-bold text-[#24201D]">AURASKIN</span>
-          <div class="border-l border-[#E5DFD5] pl-4">
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-bold tracking-wider uppercase text-[#24201D]">AURASKIN CONTROL</span>
-              <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full">● EN VIVO</span>
-            </div>
-            <p class="text-[11px] text-[#6E665F]">Gestor de Catálogo, Fotos y Precios</p>
-          </div>
-        </div>
-
-        <!-- Botones de Acción Principales (Igual a tu referencia) -->
-        <div class="flex flex-wrap items-center gap-2.5">
-          <button onclick="openNewProductModal()" class="bg-[#F3EFE8] hover:bg-[#E5DFD5] text-[#24201D] border border-[#D8CFC2] px-4 py-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
-            <span>+</span> Nuevo Producto
-          </button>
-
-          <button onclick="saveAdminChanges()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-xs font-semibold transition shadow-xs flex items-center gap-1.5">
-            <span>💾</span> Guardar Cambios en la Web
-          </button>
-
-          <button onclick="exportUpdatedHTML()" title="Descarga el archivo index.html actualizado para subirlo a GitHub" class="bg-[#8C735B] hover:bg-[#735d49] text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
-            <span>↓</span> Exportar HTML
-          </button>
-
-          <button onclick="exitAdminPage()" class="bg-white hover:bg-[#F3EFE8] text-[#24201D] border border-[#E5DFD5] px-4 py-2.5 rounded-xl text-xs font-semibold transition">
-            ← Volver a la Tienda
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Contenido Principal del Panel -->
-    <div class="max-w-7xl mx-auto px-6 py-8">
+  <!-- Pie de Página (Footer) con Ubicación, WhatsApp, Instagram y Acceso Camerino abajo -->
+  <footer class="bg-[#F5F1EA] border-t border-[#E5DFD5] text-[#6E665F] mt-16">
+    <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs">
       
-      <!-- Título y Subtítulo -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
-        <div>
-          <h1 class="font-editorial text-3xl sm:text-4xl font-bold text-[#24201D]">Gestión de Productos, Fotos & Precios</h1>
-          <p class="text-xs sm:text-sm text-[#6E665F] mt-1">Toma fotos en vivo con la cámara o sube archivos desde tu computadora. Pulsa <strong>"Guardar Cambios en la Web"</strong> para actualizar los precios.</p>
-        </div>
-
-        <!-- Filtro por Marca -->
-        <div class="flex items-center gap-2">
-          <span class="text-xs text-[#6E665F] font-medium">Marca:</span>
-          <select id="adminBrandFilter" onchange="renderAdminGrid()" class="bg-white border border-[#E5DFD5] rounded-xl px-3.5 py-2 text-xs font-medium text-[#24201D] outline-none focus:border-[#8C735B]">
-            <option value="Todas">Todas las marcas</option>
-          </select>
-        </div>
+      <!-- Marca y Ubicación -->
+      <div class="text-center md:text-left space-y-1">
+        <p class="font-serif-brand text-lg font-semibold text-[#3A3532] tracking-wider uppercase">Aura Skin</p>
+        <p class="flex items-center justify-center md:justify-start gap-1.5">
+          <span>📍 Caracas, Venezuela</span>
+        </p>
       </div>
 
-      <!-- Pestañas de Categorías (Píldoras como en la imagen) -->
-      <div id="adminCategoryPills" class="flex gap-2 overflow-x-auto no-scrollbar pb-3 mb-6"></div>
+      <!-- Contacto directo: WhatsApp e Instagram -->
+      <div class="flex flex-wrap justify-center items-center gap-6">
+        <a href="https://wa.me/584142120336" target="_blank" rel="noopener noreferrer" 
+           class="hover:text-[#3A3532] transition-colors flex items-center gap-1.5 font-medium">
+          <span>WhatsApp: +58 414-2120336</span>
+        </a>
+        
+        <a href="https://www.instagram.com/auraskinve" target="_blank" rel="noopener noreferrer" 
+           class="hover:text-[#3A3532] transition-colors flex items-center gap-1.5 font-medium">
+          <span>Instagram: @auraskinve</span>
+        </a>
+      </div>
 
-      <!-- Cuadrícula de Tarjetas de Productos (3 columnas amplias y limpias) -->
-      <div id="adminProductGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      <!-- Acceso discreto al Camerino al final de la página -->
+      <div>
+        <button onclick="openAdminModal()" 
+                class="text-[11px] text-[#A39B93] hover:text-[#3A3532] transition-colors underline underline-offset-4">
+          Camerino
+        </button>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- DRAWER CARRITO / BOLSA DE COMPRAS -->
+  <div id="cartDrawer" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex justify-end">
+    <div class="bg-[#FDFBF7] w-full max-w-md h-full flex flex-col shadow-2xl">
+      <div class="p-5 border-b border-[#E5DFD5] flex items-center justify-between">
+        <h3 class="font-serif-brand text-2xl font-semibold text-[#3A3532]">Tu Bolsa</h3>
+        <button onclick="toggleCart()" class="text-[#6E665F] hover:text-[#3A3532] text-lg">✕</button>
+      </div>
+      
+      <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-4">
+      </div>
+
+      <div class="p-5 border-t border-[#E5DFD5] bg-[#F5F1EA] space-y-3">
+        <div class="flex justify-between text-sm font-semibold text-[#3A3532]">
+          <span>Total estimado</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+        <button onclick="checkoutWhatsApp()" class="w-full bg-[#3A3532] hover:bg-[#524B47] text-white py-3 rounded-full text-xs font-medium tracking-wider uppercase transition-colors">
+          Enviar pedido por WhatsApp
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- ===================================================================== -->
-  <!-- MODALES AUXILIARES (DETALLE, CARRITO, LOGIN, NUEVO PRODUCTO)          -->
-  <!-- ===================================================================== -->
-
-  <!-- Modal Detalle de Producto -->
-  <div id="productModal" class="fixed inset-0 z-50 hidden bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#FAF8F5] rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#E5DFD5] relative p-6">
-      <button onclick="closeProductModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white border border-[#E5DFD5] flex items-center justify-center text-sm hover:bg-[#24201D] hover:text-white transition">✕</button>
-      <div id="modalContent" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-    </div>
-  </div>
-
-  <!-- Carrito Lateral -->
-  <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
-    <div onclick="toggleCart(false)" class="absolute inset-0 bg-black/40 backdrop-blur-xs"></div>
-    <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-[#FAF8F5] shadow-2xl flex flex-col p-6 border-l border-[#E5DFD5]">
-      <div class="flex justify-between items-center border-b border-[#E5DFD5] pb-4 mb-4">
-        <h3 class="font-editorial text-2xl font-semibold">Tu Bolsa</h3>
-        <button onclick="toggleCart(false)" class="w-8 h-8 rounded-full hover:bg-[#F3EFE8] flex items-center justify-center">✕</button>
-      </div>
-      <div id="cartItemsContainer" class="flex-1 overflow-y-auto space-y-3"></div>
-      <div class="border-t border-[#E5DFD5] pt-4 space-y-3">
-        <input type="text" id="customerName" placeholder="Tu Nombre" class="w-full border border-[#E5DFD5] bg-white rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-[#8C735B]" />
-        <input type="text" id="customerCity" placeholder="Ciudad / Zona" class="w-full border border-[#E5DFD5] bg-white rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-[#8C735B]" />
-        <div class="flex justify-between text-base font-bold pt-1"><span>Total estimado:</span><span id="cartTotal">$0.00</span></div>
-        <button onclick="checkoutWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-3.5 rounded-full text-sm font-semibold transition shadow-sm">Enviar Pedido por WhatsApp</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal para Crear Nuevo Producto -->
-  <div id="newProductModal" class="fixed inset-0 z-50 hidden bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#FAF8F5] rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-[#E5DFD5] space-y-4 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-[#E5DFD5] pb-3">
+  <!-- MODAL DE CONTRASEÑA Y PANEL CAMERINO (ADMIN) -->
+  <div id="adminModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#FDFBF7] border border-[#E5DFD5] rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+      
+      <!-- Header Modal -->
+      <div class="px-6 py-4 border-b border-[#E5DFD5] bg-[#F5F1EA] flex items-center justify-between">
         <div>
-          <span class="text-[10px] uppercase tracking-widest text-[#8C735B] font-bold">Catálogo Auraskin</span>
-          <h3 class="font-editorial text-2xl font-bold text-[#24201D]">Agregar Nuevo Producto</h3>
+          <h3 class="font-serif-brand text-2xl font-semibold text-[#3A3532]">Camerino Aura Skin</h3>
+          <p class="text-[11px] text-[#6E665F]">Gestión de catálogo, marcas, secciones y contenido (ml)</p>
         </div>
-        <button onclick="closeNewProductModal()" class="w-8 h-8 rounded-full bg-white border border-[#E5DFD5] flex items-center justify-center text-xs">✕</button>
+        <button onclick="closeAdminModal()" class="text-[#6E665F] hover:text-[#3A3532] text-lg">✕</button>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-        <div>
-          <label class="block text-[11px] font-semibold text-[#6E665F] mb-1">Marca</label>
-          <select id="newBrand" class="w-full bg-white border border-[#E5DFD5] rounded-xl px-3 py-2 text-xs font-medium outline-none focus:border-[#8C735B]">
-            <option value="Anua">Anua</option>
-            <option value="Medicube">Medicube</option>
-            <option value="Beauty of Joseon">Beauty of Joseon</option>
-            <option value="SKIN1004">SKIN1004</option>
-            <option value="Haruharu Wonder">Haruharu Wonder</option>
-            <option value="Centellian24">Centellian24</option>
-            <option value="Dr. Althea">Dr. Althea</option>
-            <option value="Biodance">Biodance</option>
-          </select>
-        </div>
+      <!-- Pantalla de Login -->
+      <div id="adminLoginScreen" class="p-8 text-center max-w-sm mx-auto space-y-4">
+        <p class="text-xs text-[#6E665F]">Ingresa la clave de acceso para administrar la tienda.</p>
+        <input type="password" id="adminPasswordInput" placeholder="Contraseña (ej. aura2026)" 
+               class="w-full border border-[#E5DFD5] rounded-lg px-3.5 py-2.5 text-xs text-center focus:outline-none focus:border-[#8C735B]" />
+        <p id="loginError" class="hidden text-[11px] text-red-600">Contraseña incorrecta.</p>
+        <button onclick="verifyAdminPassword()" class="w-full bg-[#8C735B] hover:bg-[#735D48] text-white py-2.5 rounded-lg text-xs font-medium transition-colors">
+          Entrar al Camerino
+        </button>
+      </div>
 
-        <div>
-          <label class="block text-[11px] font-semibold text-[#6E665F] mb-1">Categoría</label>
-          <select id="newCategory" class="w-full bg-white border border-[#E5DFD5] rounded-xl px-3 py-2 text-xs font-medium outline-none focus:border-[#8C735B]">
-            <option value="Limpiadores">Limpiadores</option>
-            <option value="Brumas y Tónicos">Brumas y Tónicos</option>
-            <option value="Sérums">Sérums</option>
-            <option value="Hidratantes">Hidratantes</option>
-            <option value="Mascarillas">Mascarillas</option>
-            <option value="Bloqueadores">Bloqueadores</option>
-          </select>
-        </div>
-
-        <div class="sm:col-span-2">
-          <label class="block text-[11px] font-semibold text-[#6E665F] mb-1">Nombre del Producto</label>
-          <input type="text" id="newName" placeholder="Ej. Heartleaf Pore Control Cleansing Oil" class="w-full bg-white border border-[#E5DFD5] rounded-xl px-3.5 py-2 text-xs outline-none focus:border-[#8C735B]" />
-        </div>
-
-        <div>
-          <label class="block text-[11px] font-semibold text-[#6E665F] mb-1">Precio ($ USD)</label>
-          <input type="number" id="newPrice" placeholder="Ej. 24" class="w-full bg-white border border-[#E5DFD5] rounded-xl px-3.5 py-2 text-xs outline-none focus:border-[#8C735B]" />
-        </div>
-
-        <div>
-          <label class="block text-[11px] font-semibold text-[#6E665F] mb-1">Contenido / Tamaño</label>
-          <input type="text" id="newSize" placeholder="Ej. 200ml" class="w-full bg-white border border-[#E5DFD5] rounded-xl px-3.5 py-2 text-xs outline-none focus:border-[#8C735B]" />
-        </div>
-
-        <div class="sm:col-span-2">
-          <label class="block text-[11px] font-semibold text-[#6E665F] mb-1">Descripción corta</label>
-          <input type="text" id="newDesc" placeholder="Beneficios principales..." class="w-full bg-white border border-[#E5DFD5] rounded-xl px-3.5 py-2 text-xs outline-none focus:border-[#8C735B]" />
-        </div>
-
-        <div class="sm:col-span-2">
-          <label class="block text-[11px] font-semibold text-[#6E665F] mb-1.5">Imagen del Producto</label>
-          <div class="flex items-center gap-3 bg-white p-2.5 rounded-xl border border-[#E5DFD5]">
-            <img id="newImgPreview" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=200&q=80" class="w-12 h-12 rounded-lg object-cover bg-[#F3EFE8]" />
+      <!-- Panel de Administración Autenticado -->
+      <div id="adminPanelContent" class="hidden flex-1 overflow-y-auto p-6 space-y-8">
+        
+        <!-- 1. Gestión Dinámica de Marcas y Secciones -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#F5F1EA] p-4 rounded-xl border border-[#E5DFD5]">
+          <!-- Agregar Nueva Marca -->
+          <div class="space-y-2">
+            <label class="block text-xs font-semibold text-[#3A3532]">Agregar Nueva Marca</label>
             <div class="flex gap-2">
-              <label for="newFileInput" class="cursor-pointer bg-[#F3EFE8] hover:bg-[#E5DFD5] text-[#24201D] px-3 py-1.5 rounded-lg text-xs font-semibold transition">
-                📁 Archivo
-              </label>
-              <input type="file" id="newFileInput" accept="image/*" onchange="previewNewProductFile('newFileInput')" class="hidden" />
-
-              <label for="newCamInput" class="cursor-pointer bg-[#8C735B] hover:bg-[#735d49] text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition">
-                📷 Cámara
-              </label>
-              <input type="file" id="newCamInput" accept="image/*" capture="environment" onchange="previewNewProductFile('newCamInput')" class="hidden" />
+              <input type="text" id="newBrandInput" placeholder="Ej. Beauty of Joseon, Anua..." 
+                     class="flex-1 bg-white border border-[#E5DFD5] rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#8C735B]">
+              <button onclick="addBrand()" class="bg-[#3A3532] text-white px-3.5 py-2 rounded-lg text-xs hover:bg-[#524B47]">
+                + Añadir
+              </button>
             </div>
+            <div id="adminBrandsList" class="flex flex-wrap gap-1.5 pt-1"></div>
+          </div>
+
+          <!-- Agregar Nueva Sección / Categoría -->
+          <div class="space-y-2">
+            <label class="block text-xs font-semibold text-[#3A3532]">Agregar Nueva Sección</label>
+            <div class="flex gap-2">
+              <input type="text" id="newCategoryInput" placeholder="Ej. Contorno de Ojos, Mascarillas..." 
+                     class="flex-1 bg-white border border-[#E5DFD5] rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-[#8C735B]">
+              <button onclick="addCategory()" class="bg-[#3A3532] text-white px-3.5 py-2 rounded-lg text-xs hover:bg-[#524B47]">
+                + Añadir
+              </button>
+            </div>
+            <div id="adminCategoriesList" class="flex flex-wrap gap-1.5 pt-1"></div>
           </div>
         </div>
-      </div>
 
-      <div class="flex justify-end gap-2 pt-2">
-        <button onclick="closeNewProductModal()" class="text-xs text-[#6E665F] px-4 py-2">Cancelar</button>
-        <button onclick="addNewProduct()" class="bg-[#24201D] hover:bg-[#8C735B] text-white px-6 py-2.5 rounded-xl text-xs font-semibold transition">Crear Producto</button>
-      </div>
-    </div>
-  </div>
+        <!-- 2. Formulario para Crear o Editar Producto (Incluye campo de ml) -->
+        <div class="border border-[#E5DFD5] rounded-xl p-5 bg-white space-y-4">
+          <div class="flex items-center justify-between">
+            <h4 id="productFormTitle" class="font-semibold text-sm text-[#3A3532]">Agregar Nuevo Producto</h4>
+            <button id="cancelEditBtn" onclick="resetProductForm()" class="hidden text-xs text-[#8C735B] underline">Cancelar edición</button>
+          </div>
+          
+          <input type="hidden" id="editProductId">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-[11px] font-medium text-[#6E665F] mb-1">Nombre del Producto *</label>
+              <input type="text" id="prodName" placeholder="Ej. Hyalu-Cica Water-Fit Sun Serum" class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-xs">
+            </div>
+            
+            <div>
+              <label class="block text-[11px] font-medium text-[#6E665F] mb-1">Marca *</label>
+              <select id="prodBrand" class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-xs bg-white"></select>
+            </div>
 
-  <!-- Login Admin Modal -->
-  <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#FAF8F5] rounded-2xl max-w-sm w-full p-7 shadow-2xl border border-[#E5DFD5] space-y-4">
-      <div class="text-center space-y-1">
-        <span class="text-[10px] uppercase tracking-[0.25em] text-[#8C735B] font-bold">Acceso Privado</span>
-        <h3 class="text-2xl font-bold font-editorial text-[#24201D]">Auraskin Control</h3>
-        <p class="text-xs text-[#6E665F]">Ingresa tu contraseña para abrir el panel de gestión completo.</p>
-      </div>
-      <input type="password" id="adminPasswordInput" onkeydown="if(event.key==='Enter') verifyAdminPassword()" placeholder="Contraseña..." class="w-full border border-[#E5DFD5] bg-white rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#8C735B]" />
-      <div class="flex justify-end gap-2 pt-1">
-        <button onclick="document.getElementById('adminLoginModal').classList.add('hidden')" class="text-xs text-[#6E665F] px-4 py-2 hover:text-[#24201D]">Cancelar</button>
-        <button onclick="verifyAdminPassword()" class="bg-[#24201D] text-white px-6 py-2.5 rounded-full text-xs font-semibold hover:bg-[#3b3530] transition">Entrar</button>
-      </div>
-    </div>
-  </div>
+            <div>
+              <label class="block text-[11px] font-medium text-[#6E665F] mb-1">Sección / Categoría *</label>
+              <select id="prodCategory" class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-xs bg-white"></select>
+            </div>
 
-  <!-- Settings Modal (WhatsApp) -->
-  <div id="settingsModal" class="fixed inset-0 z-50 hidden bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#FAF8F5] rounded-2xl max-w-sm w-full p-6 border border-[#E5DFD5] shadow-xl space-y-4">
-      <h3 class="font-editorial text-2xl font-semibold text-[#24201D]">Configurar WhatsApp</h3>
-      <div>
-        <label class="block text-xs text-[#6E665F] mb-1">Número con código de país (sin +)</label>
-        <input type="text" id="settingWhatsapp" class="w-full border border-[#E5DFD5] bg-white rounded-xl px-3.5 py-2.5 text-sm outline-none" placeholder="Ej: 584121234567" />
-      </div>
-      <div class="flex justify-end gap-2">
-        <button onclick="document.getElementById('settingsModal').classList.add('hidden')" class="text-xs text-[#6E665F] px-3 py-2">Cerrar</button>
-        <button onclick="closeSettings()" class="bg-[#24201D] text-white px-5 py-2 rounded-full text-xs font-semibold">Guardar</button>
+            <div>
+              <label class="block text-[11px] font-medium text-[#6E665F] mb-1">Precio ($ USD) *</label>
+              <input type="number" step="0.01" id="prodPrice" placeholder="Ej. 24.00" class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-xs">
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-medium text-[#6E665F] mb-1">Contenido (ml)</label>
+              <input type="number" id="prodMl" placeholder="Ej. 50" class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-xs">
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-medium text-[#6E665F] mb-1">URL de Imagen</label>
+              <input type="text" id="prodImage" placeholder="https://..." class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-xs">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-medium text-[#6E665F] mb-1">Descripción breve</label>
+            <input type="text" id="prodDesc" placeholder="Beneficios principales, tipo de piel..." class="w-full border border-[#E5DFD5] rounded-lg px-3 py-2 text-xs">
+          </div>
+
+          <div class="flex justify-end gap-2">
+            <button onclick="saveProduct()" class="bg-[#8C735B] hover:bg-[#735D48] text-white px-5 py-2 rounded-lg text-xs font-medium transition-colors">
+              Guardar Producto
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Listado de Productos Existentes para Editar / Eliminar -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="font-semibold text-sm text-[#3A3532]">Inventario Actual</h4>
+            <button onclick="exportUpdatedHTML()" class="text-xs bg-[#3A3532] text-white px-3 py-1.5 rounded-lg hover:bg-[#524B47]">
+              Descargar index.html actualizado
+            </button>
+          </div>
+          <div id="adminProductsList" class="divide-y divide-[#E5DFD5] border border-[#E5DFD5] rounded-xl bg-white overflow-hidden">
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 
   <script>
-    const DEFAULT_WHATSAPP = "584120000000";
-    const ADMIN_PASS = "auraskin2026";
-    let storeConfig = { whatsapp: localStorage.getItem('auraskin_wa') || DEFAULT_WHATSAPP };
+    const ADMIN_PASS = "aura2026";
 
-    const DEFAULT_PRODUCTS = [
-      // HARUHARU WONDER
-      { id: 1, brand: "Haruharu Wonder", name: "Black Rice Hyaluronic Toner", category: "Brumas y Tónicos", price: 22, size: "300ml", badge: "Viral", desc: "Tónico de arroz negro fermentado altamente hidratante.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80", fileName: "haruharu_toner.jpg" },
-      { id: 2, brand: "Haruharu Wonder", name: "Black Rice Moisture Cleansing Gel", category: "Limpiadores", price: 18, size: "100ml", badge: "Suave", desc: "Gel limpiador facial con pH balanceado.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80", fileName: "haruharu_gel.jpg" },
-      { id: 3, brand: "Haruharu Wonder", name: "Black Rice Moisture Airy Sunscreen SPF50+", category: "Bloqueadores", price: 21, size: "50ml", badge: "Favorito", desc: "Bloqueador solar ultraligero de rápida absorción.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80", fileName: "haruharu_sun.jpg" },
+    const defaultBrands = ["SKIN1004", "Beauty of Joseon", "COSRX", "Anua", "Mixsoon"];
+    const defaultCategories = ["Protectores Solares", "Sueros y Ampollas", "Limpiadores", "Hidratantes", "Mascarillas"];
 
-      // CENTELLIAN24
-      { id: 4, brand: "Centellian24", name: "Madeca Cream Time Reverse", category: "Hidratantes", price: 32, size: "50ml", badge: "Bestseller", desc: "La icónica crema coreana regeneradora con TECA y centella.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80", fileName: "madeca_cream.jpg" },
-      { id: 5, brand: "Centellian24", name: "Madeca Micro Peel Shot Ampoule", category: "Sérums", price: 34, size: "30ml", badge: "Efecto Shot", desc: "Ampolla de tratamiento intensivo con micropartículas.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80", fileName: "madeca_shot.jpg" },
-      { id: 6, brand: "Centellian24", name: "Madeca Derma Balancing Cleanser", category: "Limpiadores", price: 20, size: "150ml", badge: "Dermatológico", desc: "Limpiador facial dermoprotector con centella asiática.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80", fileName: "madeca_cleanser.jpg" },
-
-      // ANUA
-      { id: 7, brand: "Anua", name: "Heartleaf Pore Control Cleansing Oil", category: "Limpiadores", price: 24, size: "200ml", badge: "Viral TikTok", desc: "Aceite limpiador número 1 para puntos negros.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80", fileName: "anua_oil.jpg" },
-      { id: 8, brand: "Anua", name: "Heartleaf Quercetinol Pore Deep Cleansing Foam", category: "Limpiadores", price: 21, size: "150ml", badge: "Top", desc: "Espuma limpiadora profunda para poros.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80", fileName: "anua_foam.jpg" },
-      { id: 9, brand: "Anua", name: "Heartleaf 77% Soothing Toner", category: "Brumas y Tónicos", price: 24, size: "250ml", badge: "Imprescindible", desc: "Tónico calmante ultraligero que equilibra el pH.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80", fileName: "anua_toner.jpg" },
-      { id: 10, brand: "Anua", name: "Peach 70 Niacin Serum", category: "Sérums", price: 28, size: "30ml", badge: "Glass Skin", desc: "Sérum iluminador con melocotón y niacinamida.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80", fileName: "anua_peach.jpg" },
-      { id: 11, brand: "Anua", name: "Heartleaf Clay Mask Stick", category: "Mascarillas", price: 20, size: "50g", badge: "En Barra", desc: "Mascarilla de arcilla en barra práctica.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80", fileName: "anua_clay.jpg" },
-      { id: 12, brand: "Anua", name: "Heartleaf Silky Moisture Sun Cream SPF50+", category: "Bloqueadores", price: 23, size: "50ml", badge: "Solar", desc: "Protector solar hidratante con heartleaf.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80", fileName: "anua_sun.jpg" },
-
-      // MEDICUBE
-      { id: 13, brand: "Medicube", name: "Red Body Scrub & Wash (Corporal)", category: "Limpiadores", price: 29, size: "400ml", badge: "Corporal", desc: "Exfoliante para brotes en la espalda.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80", fileName: "medicube_body.jpg" },
-      { id: 14, brand: "Medicube", name: "PDRN Pink Collagen Gel Cleanser", category: "Limpiadores", price: 28, size: "150ml", badge: "Glass Skin", desc: "Limpiador facial con colágeno y PDRN.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80", fileName: "medicube_cleanser.jpg" },
-      { id: 15, brand: "Medicube", name: "PDRN Pink Collagen Glow Jelly Mist", category: "Brumas y Tónicos", price: 27, size: "100ml", badge: "Viral", desc: "Bruma bifásica de gelatina y colágeno.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80", fileName: "medicube_mist.jpg" },
-      { id: 16, brand: "Medicube", name: "PDRN Pink Peptide Serum", category: "Sérums", price: 31, size: "30ml", badge: "Top", desc: "Sérum reafirmante con PDRN y péptidos.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80", fileName: "medicube_serum.jpg" },
-      { id: 17, brand: "Medicube", name: "Collagen Jelly Cream", category: "Hidratantes", price: 31, size: "110ml", badge: "Relleno", desc: "Crema en gelatina transparente con colágeno.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80", fileName: "medicube_jelly.jpg" },
-      { id: 18, brand: "Medicube", name: "PDRN Pink Collagen Gel Mask", category: "Mascarillas", price: 27, size: "4 und", badge: "Hidrogel", desc: "Mascarilla rosa de colágeno nocturna.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80", fileName: "medicube_mask.jpg" },
-
-      // BEAUTY OF JOSEON
-      { id: 19, brand: "Beauty of Joseon", name: "Green Plum Refreshing Cleanser", category: "Limpiadores", price: 17, size: "100ml", badge: "Favorito", desc: "Gel limpiador suave con ciruela verde.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80", fileName: "boj_cleanser.jpg" },
-      { id: 20, brand: "Beauty of Joseon", name: "Glow Serum: Propolis + Niacinamide", category: "Sérums", price: 19, size: "30ml", badge: "Bestseller", desc: "Sérum textura miel con propóleo.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80", fileName: "boj_glow.jpg" },
-      { id: 21, brand: "Beauty of Joseon", name: "Red Bean Refreshing Pore Mask", category: "Mascarillas", price: 21, size: "140ml", badge: "Arcilla", desc: "Mascarilla de arcilla con frijol rojo.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80", fileName: "boj_mask.jpg" },
-      { id: 22, brand: "Beauty of Joseon", name: "Relief Sun: Rice + Probiotics SPF50+", category: "Bloqueadores", price: 20, size: "50ml", badge: "Top Mundial", desc: "Protector solar icónico sin rastro blanco.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80", fileName: "boj_sun.jpg" },
-
-      // SKIN1004
-      { id: 23, brand: "SKIN1004", name: "Madagascar Centella Light Cleansing Oil", category: "Limpiadores", price: 22, size: "200ml", badge: "Top", desc: "Aceite desmaquillante ligero con centella.", img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=700&q=80", fileName: "skin1004_oil.jpg" },
-      { id: 24, brand: "SKIN1004", name: "Madagascar Centella Ampoule", category: "Sérums", price: 23, size: "100ml", badge: "Calmante", desc: "Ampolla pura de centella asiática para reparar.", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80", fileName: "skin1004_ampoule.jpg" },
-      { id: 25, brand: "SKIN1004", name: "Madagascar Centella Clearing Clay Stick", category: "Mascarillas", price: 19, size: "38g", badge: "En Barra", desc: "Mascarilla de arcilla en barra práctica.", img: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80", fileName: "skin1004_stick.jpg" },
-      { id: 26, brand: "SKIN1004", name: "Madagascar Centella Hyalu-Cica Sun Serum", category: "Bloqueadores", price: 22, size: "50ml", badge: "El Azul", desc: "Protector solar textura suero acuoso cero grasoso.", img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=80", fileName: "skin1004_sun.jpg" },
-
-      // DR. ALTHEA
-      { id: 27, brand: "Dr. Althea", name: "345 Relief Cream", category: "Hidratantes", price: 29, size: "50ml", badge: "Súper Viral", desc: "Crema reparadora de barrera post-acné.", img: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=80", fileName: "dralthea_345.jpg" },
-      { id: 28, brand: "Dr. Althea", name: "345 Relief Cream Mist", category: "Brumas y Tónicos", price: 25, size: "100ml", badge: "Favorito", desc: "Bruma calmante e hidratante con niacinamida.", img: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=700&q=80", fileName: "dralthea_mist.jpg" }
+    const defaultProducts = [
+      {
+        id: 1,
+        name: "Madagascar Centella Hyalu-Cica Water-Fit Sun Serum",
+        brand: "SKIN1004",
+        category: "Protectores Solares",
+        price: 22.00,
+        ml: 50,
+        desc: "Protector solar químico ultraligero con ácido hialurónico y centella asiática. Sin rastro blanco.",
+        image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 2,
+        name: "Glow Serum: Propolis + Niacinamide",
+        brand: "Beauty of Joseon",
+        category: "Sueros y Ampollas",
+        price: 20.00,
+        ml: 30,
+        desc: "Suero iluminador y calmante que controla el sebo y mejora la textura de los poros.",
+        image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 3,
+        name: "Heartleaf 77% Soothing Toner",
+        brand: "Anua",
+        category: "Hidratantes",
+        price: 24.00,
+        ml: 250,
+        desc: "Tónico calmante con 77% de extracto de Houttuynia Cordata ideal para pieles sensibles.",
+        image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        id: 4,
+        name: "Advanced Snail 96 Mucin Power Essence",
+        brand: "COSRX",
+        category: "Sueros y Ampollas",
+        price: 23.00,
+        ml: 100,
+        desc: "Esencia reparadora e hidratante profunda con 96% de filtrado de secreción de caracol.",
+        image: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=600&q=80"
+      }
     ];
 
-    let PRODUCTS = JSON.parse(localStorage.getItem('auraskin_custom_products')) || DEFAULT_PRODUCTS;
-    const CATEGORIES = ["Todos", "Limpiadores", "Brumas y Tónicos", "Sérums", "Hidratantes", "Mascarillas", "Bloqueadores"];
+    let brands = JSON.parse(localStorage.getItem('auraskin_brands')) || [...defaultBrands];
+    let categories = JSON.parse(localStorage.getItem('auraskin_categories')) || [...defaultCategories];
+    let products = JSON.parse(localStorage.getItem('auraskin_products')) || [...defaultProducts];
+    let cart = [];
 
-    let selectedCategory = "Todos";
+    let selectedCategory = "Todas";
     let selectedBrand = "Todas";
-    let adminSelectedCategory = "Todos";
-    let cart = JSON.parse(localStorage.getItem('auraskin_cart')) || [];
+    let searchQuery = "";
 
-    function getUniqueBrands() {
-      const set = new Set(["Todas", "Haruharu Wonder", "Centellian24", "Anua", "Medicube", "Beauty of Joseon", "SKIN1004", "Dr. Althea"]);
-      PRODUCTS.forEach(p => set.add(p.brand));
-      return Array.from(set);
+    function saveState() {
+      localStorage.setItem('auraskin_brands', JSON.stringify(brands));
+      localStorage.setItem('auraskin_categories', JSON.stringify(categories));
+      localStorage.setItem('auraskin_products', JSON.stringify(products));
     }
 
-    function init() {
-      renderCategories();
-      renderBrands();
-      renderProducts();
-      updateCartUI();
+    function renderFilters() {
+      const catContainer = document.getElementById('categoryFilters');
+      const allCats = ["Todas", ...categories];
+      catContainer.innerHTML = allCats.map(cat => {
+        const active = selectedCategory === cat;
+        return `
+          <button onclick="setCategory('${cat}')" 
+            class="whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs transition-colors ${
+              active ? 'bg-[#3A3532] text-white font-medium' : 'bg-white border border-[#E5DFD5] text-[#6E665F] hover:border-[#8C735B]'
+            }">
+            ${cat}
+          </button>
+        `;
+      }).join('');
 
-      // Si entra con ?admin=1 en la URL, pide contraseña directo
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('admin') === '1') {
-        openAdminLogin();
-      }
+      const brandContainer = document.getElementById('brandFilters');
+      const allBrands = ["Todas", ...brands];
+      brandContainer.innerHTML = allBrands.map(brand => {
+        const active = selectedBrand === brand;
+        return `
+          <button onclick="setBrand('${brand}')" 
+            class="px-2.5 py-1 rounded-md text-[11px] transition-colors ${
+              active ? 'bg-[#8C735B] text-white font-medium' : 'bg-[#F5F1EA] text-[#6E665F] hover:bg-[#E5DFD5]'
+            }">
+            ${brand}
+          </button>
+        `;
+      }).join('');
     }
-
-    function renderCategories() {
-      document.getElementById('categoryTabs').innerHTML = CATEGORIES.map(c =>
-        `<button onclick="filterCategory('${c}')" class="whitespace-nowrap px-4 py-2 rounded-full text-xs font-medium transition ${c===selectedCategory?'bg-[#24201D] text-white':'bg-[#F3EFE8] text-[#6E665F] hover:text-[#24201D]'}">${c}</button>`
-      ).join('');
-    }
-
-    function renderBrands() {
-      document.getElementById('brandPills').innerHTML = getUniqueBrands().map(b =>
-        `<button onclick="filterBrand('${b}')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs border transition ${b===selectedBrand?'bg-[#8C735B] border-[#8C735B] text-white font-medium':'bg-white border-[#E5DFD5] text-[#6E665F] hover:border-[#8C735B]'}">${b}</button>`
-      ).join('');
-    }
-
-    function filterCategory(c) { selectedCategory = c; renderCategories(); renderProducts(); }
-    function filterBrand(b) { selectedBrand = b; renderBrands(); renderProducts(); }
-    function resetFilters() { selectedCategory = "Todos"; selectedBrand = "Todas"; renderCategories(); renderBrands(); renderProducts(); }
 
     function renderProducts() {
-      const filtered = PRODUCTS.filter(p => (selectedCategory === "Todos" || p.category === selectedCategory) && (selectedBrand === "Todas" || p.brand === selectedBrand));
-      document.getElementById('productCountLabel').textContent = `Mostrando ${filtered.length} productos`;
-      document.getElementById('productGrid').innerHTML = filtered.map(p => `
-        <div class="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-2xs hover:shadow-md transition">
-          <div>
-            <div onclick="openModal(${p.id})" class="relative aspect-square bg-[#F3EFE8] cursor-pointer overflow-hidden">
-              <img src="${p.img}" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
-              ${p.badge ? `<span class="absolute top-2.5 left-2.5 bg-[#FAF8F5]/95 text-[#24201D] text-[10px] font-semibold px-2.5 py-1 rounded-full border border-[#E5DFD5]">${p.badge}</span>`:''}
-            </div>
-            <div class="p-4">
-              <p class="text-[10px] uppercase tracking-widest text-[#8C735B] font-bold">${p.brand}</p>
-              <h3 onclick="openModal(${p.id})" class="font-editorial text-lg font-semibold cursor-pointer hover:text-[#8C735B] line-clamp-2 mt-0.5">${p.name}</h3>
-            </div>
+      const grid = document.getElementById('productsGrid');
+      const empty = document.getElementById('emptyState');
+      const counter = document.getElementById('productCounter');
+      const title = document.getElementById('catalogTitle');
+
+      const filtered = products.filter(p => {
+        const matchCat = selectedCategory === "Todas" || p.category === selectedCategory;
+        const matchBrand = selectedBrand === "Todas" || p.brand === selectedBrand;
+        const q = searchQuery.toLowerCase();
+        const matchSearch = !q || 
+          p.name.toLowerCase().includes(q) || 
+          p.brand.toLowerCase().includes(q) || 
+          p.category.toLowerCase().includes(q) ||
+          (p.desc && p.desc.toLowerCase().includes(q));
+        return matchCat && matchBrand && matchSearch;
+      });
+
+      title.textContent = selectedCategory === "Todas" && selectedBrand === "Todas" 
+        ? "Todos los Productos" 
+        : `${selectedCategory !== "Todas" ? selectedCategory : ""} ${selectedBrand !== "Todas" ? "• " + selectedBrand : ""}`.trim();
+
+      counter.textContent = `${filtered.length} producto${filtered.length === 1 ? '' : 's'}`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = "";
+        empty.classList.remove('hidden');
+        return;
+      }
+
+      empty.classList.add('hidden');
+      grid.innerHTML = filtered.map(p => `
+        <div class="bg-white border border-[#E5DFD5] rounded-2xl overflow-hidden flex flex-col hover:shadow-md transition-shadow group">
+          <div class="relative aspect-square bg-[#F5F1EA] overflow-hidden">
+            <img src="${p.image || 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80'}" 
+                 alt="${p.name}" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase text-[#8C735B]">
+              ${p.brand}
+            </span>
+            ${p.ml ? `
+              <span class="absolute bottom-3 right-3 bg-[#3A3532]/85 text-white px-2.5 py-0.5 rounded-full text-[10px] font-medium">
+                ${p.ml} ml
+              </span>
+            ` : ''}
           </div>
-          <div class="px-4 pb-4 pt-2 flex justify-between items-center border-t border-[#F3EFE8]">
-            <span class="font-semibold text-sm text-[#24201D]">$${Number(p.price).toFixed(2)}</span>
-            <button onclick="addToCart(${p.id})" class="bg-[#24201D] hover:bg-[#8C735B] text-white text-xs px-3.5 py-2 rounded-full transition">+ Agregar</button>
+          <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-1.5">
+              <p class="text-[10px] uppercase tracking-widest text-[#9B9188]">${p.category}</p>
+              <h3 class="font-serif-brand text-xl font-semibold text-[#3A3532] leading-snug">${p.name}</h3>
+              <p class="text-xs text-[#6E665F] line-clamp-2">${p.desc || ''}</p>
+            </div>
+            <div class="pt-3 border-t border-[#F0ECE4] flex items-center justify-between">
+              <span class="text-base font-semibold text-[#3A3532]">$${Number(p.price).toFixed(2)}</span>
+              <button onclick="addToCart(${p.id})" 
+                      class="bg-[#F5F1EA] hover:bg-[#3A3532] text-[#3A3532] hover:text-white px-4 py-2 rounded-full text-xs font-medium transition-colors">
+                + Agregar
+              </button>
+            </div>
           </div>
         </div>
       `).join('');
     }
 
-    function openModal(id) {
-      const p = PRODUCTS.find(i => i.id === id);
-      if (!p) return;
-      document.getElementById('modalContent').innerHTML = `
-        <img src="${p.img}" class="w-full aspect-square object-cover rounded-xl bg-[#F3EFE8]" />
-        <div class="flex flex-col justify-between">
-          <div>
-            <span class="text-xs uppercase tracking-widest text-[#8C735B] font-bold">${p.brand}</span>
-            <h2 class="font-editorial text-2xl sm:text-3xl font-semibold mt-1 text-[#24201D]">${p.name}</h2>
-            <p class="text-xl font-semibold mt-2 text-[#24201D]">$${Number(p.price).toFixed(2)} <span class="text-xs font-normal text-[#6E665F]">/ ${p.size || ''}</span></p>
-            <p class="text-sm text-[#6E665F] mt-3 leading-relaxed">${p.desc || ''}</p>
-          </div>
-          <button onclick="addToCart(${p.id}); closeProductModal();" class="w-full bg-[#24201D] hover:bg-[#8C735B] text-white py-3 rounded-full text-xs uppercase tracking-widest font-semibold mt-6 transition">Agregar a mi Bolsa</button>
-        </div>`;
-      document.getElementById('productModal').classList.remove('hidden');
-    }
-    function closeProductModal() { document.getElementById('productModal').classList.add('hidden'); }
-
-    function addToCart(id) {
-      const ex = cart.find(i => i.id === id);
-      if (ex) ex.qty++; else cart.push({id, qty: 1});
-      localStorage.setItem('auraskin_cart', JSON.stringify(cart));
-      updateCartUI(); toggleCart(true);
+    function setCategory(cat) {
+      selectedCategory = cat;
+      renderFilters();
+      renderProducts();
     }
 
-    function updateQty(id, delta) {
-      const idx = cart.findIndex(i => i.id === id);
-      if (idx !== -1) {
-        cart[idx].qty += delta;
-        if (cart[idx].qty <= 0) cart.splice(idx, 1);
-        localStorage.setItem('auraskin_cart', JSON.stringify(cart));
-        updateCartUI();
+    function setBrand(brand) {
+      selectedBrand = brand;
+      renderFilters();
+      renderProducts();
+    }
+
+    function resetFilters() {
+      selectedCategory = "Todas";
+      selectedBrand = "Todas";
+      clearSearch();
+    }
+
+    const searchInput = document.getElementById('searchInput');
+    const suggestionsBox = document.getElementById('searchSuggestions');
+    const clearBtn = document.getElementById('clearSearchBtn');
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      clearBtn.classList.toggle('hidden', !searchQuery);
+      renderProducts();
+      renderSearchSuggestions(searchQuery);
+    });
+
+    function renderSearchSuggestions(query) {
+      if (!query) {
+        suggestionsBox.classList.add('hidden');
+        return;
       }
+      const q = query.toLowerCase();
+      const matchedBrands = brands.filter(b => b.toLowerCase().includes(q));
+      const matchedProducts = products.filter(p => 
+        p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q)
+      ).slice(0, 5);
+
+      if (matchedBrands.length === 0 && matchedProducts.length === 0) {
+        suggestionsBox.innerHTML = `<div class="p-3 text-xs text-[#9B9188] text-center">Sin sugerencias para "${query}"</div>`;
+        suggestionsBox.classList.remove('hidden');
+        return;
+      }
+
+      let html = '';
+      if (matchedBrands.length > 0) {
+        html += `<div class="px-3 py-1.5 bg-[#FAF8F4] text-[10px] font-semibold uppercase tracking-wider text-[#8C735B]">Marcas</div>`;
+        html += matchedBrands.map(b => `
+          <button onclick="selectBrandSuggestion('${b}')" class="w-full text-left px-3.5 py-2 text-xs hover:bg-[#F5F1EA] flex items-center justify-between">
+            <span>${b}</span>
+            <span class="text-[10px] text-[#9B9188]">Filtrar marca →</span>
+          </button>
+        `).join('');
+      }
+
+      if (matchedProducts.length > 0) {
+        html += `<div class="px-3 py-1.5 bg-[#FAF8F4] text-[10px] font-semibold uppercase tracking-wider text-[#8C735B]">Productos</div>`;
+        html += matchedProducts.map(p => `
+          <button onclick="selectProductSuggestion('${p.name.replace(/'/g, "\\'")}')" class="w-full text-left px-3.5 py-2 text-xs hover:bg-[#F5F1EA] flex items-center gap-2.5">
+            <img src="${p.image}" class="w-7 h-7 rounded object-cover bg-[#F5F1EA]" />
+            <div class="flex-1 min-w-0">
+              <p class="truncate font-medium text-[#3A3532]">${p.name}</p>
+              <p class="text-[10px] text-[#8C735B]">${p.brand} ${p.ml ? '• ' + p.ml + ' ml' : ''}</p>
+            </div>
+            <span class="font-semibold text-[#3A3532]">$${Number(p.price).toFixed(2)}</span>
+          </button>
+        `).join('');
+      }
+
+      suggestionsBox.innerHTML = html;
+      suggestionsBox.classList.remove('hidden');
+    }
+
+    function selectBrandSuggestion(brand) {
+      selectedBrand = brand;
+      searchQuery = "";
+      searchInput.value = "";
+      clearBtn.classList.add('hidden');
+      suggestionsBox.classList.add('hidden');
+      renderFilters();
+      renderProducts();
+    }
+
+    function selectProductSuggestion(name) {
+      searchQuery = name;
+      searchInput.value = name;
+      suggestionsBox.classList.add('hidden');
+      renderProducts();
+    }
+
+    function clearSearch() {
+      searchQuery = "";
+      searchInput.value = "";
+      clearBtn.classList.add('hidden');
+      suggestionsBox.classList.add('hidden');
+      renderFilters();
+      renderProducts();
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+        suggestionsBox.classList.add('hidden');
+      }
+    });
+
+    function addToCart(productId) {
+      const prod = products.find(p => p.id === productId);
+      if (!prod) return;
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...prod, qty: 1 });
+      }
+      updateCartUI();
+    }
+
+    function changeQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+      }
+      updateCartUI();
     }
 
     function updateCartUI() {
-      document.getElementById('cartCountBadge').textContent = cart.reduce((a, b) => a + b.qty, 0);
-      let sub = 0;
-      const container = document.getElementById('cartItemsContainer');
+      const countEl = document.getElementById('cartCount');
+      const itemsEl = document.getElementById('cartItems');
+      const totalEl = document.getElementById('cartTotal');
+
+      const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+      const totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+      countEl.textContent = totalQty;
+      totalEl.textContent = `$${totalPrice.toFixed(2)}`;
+
       if (cart.length === 0) {
-        container.innerHTML = `<p class="text-center text-sm text-[#6E665F] py-12">Tu bolsa está vacía.</p>`;
-      } else {
-        container.innerHTML = cart.map(i => {
-          const p = PRODUCTS.find(pr => pr.id === i.id);
-          if (!p) return '';
-          sub += p.price * i.qty;
-          return `
-            <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-[#E5DFD5]">
-              <div class="flex items-center gap-3 min-w-0">
-                <img src="${p.img}" class="w-12 h-12 rounded-lg object-cover bg-[#F3EFE8]" />
-                <div class="min-w-0">
-                  <p class="text-[10px] text-[#8C735B] font-bold uppercase">${p.brand}</p>
-                  <p class="text-xs font-semibold truncate">${p.name}</p>
-                  <div class="flex items-center gap-2 mt-1">
-                    <button onclick="updateQty(${p.id}, -1)" class="w-5 h-5 rounded-full border border-[#E5DFD5] text-xs">−</button>
-                    <span class="text-xs font-medium">${i.qty}</span>
-                    <button onclick="updateQty(${p.id}, 1)" class="w-5 h-5 rounded-full border border-[#E5DFD5] text-xs">+</button>
-                  </div>
-                </div>
-              </div>
-              <span class="text-xs font-bold ml-2">$${(p.price*i.qty).toFixed(2)}</span>
-            </div>`;
-        }).join('');
+        itemsEl.innerHTML = `<p class="text-xs text-[#9B9188] text-center py-10">Tu bolsa está vacía.</p>`;
+        return;
       }
-      document.getElementById('cartTotal').textContent = `$${sub.toFixed(2)}`;
+
+      itemsEl.innerHTML = cart.map(item => `
+        <div class="flex items-center justify-between gap-3 bg-white p-3 rounded-xl border border-[#E5DFD5]">
+          <div class="flex-1 min-w-0">
+            <p class="text-xs font-semibold text-[#3A3532] truncate">${item.name}</p>
+            <p class="text-[11px] text-[#8C735B]">${item.brand} ${item.ml ? '• ' + item.ml + 'ml' : ''} — $${Number(item.price).toFixed(2)}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 rounded-full bg-[#F5F1EA] text-xs">-</button>
+            <span class="text-xs font-medium">${item.qty}</span>
+            <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 rounded-full bg-[#F5F1EA] text-xs">+</button>
+          </div>
+        </div>
+      `).join('');
     }
-    function toggleCart(o) { document.getElementById('cartDrawer').classList.toggle('hidden', !o); }
+
+    function toggleCart() {
+      document.getElementById('cartDrawer').classList.toggle('hidden');
+    }
 
     function checkoutWhatsApp() {
-      if (cart.length === 0) return alert("Tu bolsa está vacía.");
-      const name = document.getElementById('customerName').value || "Cliente";
-      const city = document.getElementById('customerCity').value || "Caracas";
-      let total = 0;
-      let msg = `✨ *PEDIDO AURASKIN* ✨\n👤 *Cliente:* ${name}\n📍 *Zona:* ${city}\n\n`;
-      cart.forEach(i => {
-        const p = PRODUCTS.find(pr => pr.id === i.id);
-        if (p) {
-          total += p.price * i.qty;
-          msg += `• *${p.brand}* - ${p.name} x${i.qty} ($${(p.price*i.qty).toFixed(2)})\n`;
-        }
+      if (cart.length === 0) return;
+      let msg = "¡Hola Aura Skin! Me gustaría hacer el siguiente pedido:%0A%0A";
+      cart.forEach(item => {
+        msg += `• ${item.qty}x ${item.name} (${item.brand}${item.ml ? ' - ' + item.ml + 'ml' : ''}) - $${(item.price * item.qty).toFixed(2)}%0A`;
       });
-      msg += `\n💰 *Total:* $${total.toFixed(2)}`;
-      window.open(`https://wa.me/${storeConfig.whatsapp.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`, '_blank');
+      const total = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+      msg += `%0A*Total estimado: $${total.toFixed(2)}*%0A%0A¿Me confirman disponibilidad y método de entrega en Caracas?`;
+      window.open(`https://wa.me/584142120336?text=${msg}`, '_blank');
     }
 
-    // =========================================================================
-    // PANEL DE CONTROL A PANTALLA COMPLETA (AURASKIN CONTROL)
-    // =========================================================================
-    function openAdminLogin() {
-      document.getElementById('adminLoginModal').classList.remove('hidden');
-      setTimeout(() => document.getElementById('adminPasswordInput').focus(), 100);
+    function openAdminModal() {
+      document.getElementById('adminModal').classList.remove('hidden');
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').classList.add('hidden');
     }
 
     function verifyAdminPassword() {
-      if (document.getElementById('adminPasswordInput').value === ADMIN_PASS) {
-        document.getElementById('adminLoginModal').classList.add('hidden');
-        document.getElementById('adminPasswordInput').value = "";
-        enterAdminPage();
+      const input = document.getElementById('adminPasswordInput').value;
+      const error = document.getElementById('loginError');
+      if (input === ADMIN_PASS) {
+        error.classList.add('hidden');
+        document.getElementById('adminLoginScreen').classList.add('hidden');
+        document.getElementById('adminPanelContent').classList.remove('hidden');
+        renderAdminData();
       } else {
-        alert("Contraseña incorrecta");
+        error.classList.remove('hidden');
       }
     }
 
-    function enterAdminPage() {
-      document.getElementById('storefrontView').classList.add('hidden');
-      document.getElementById('adminFullPage').classList.remove('hidden');
-      window.scrollTo(0, 0);
+    function renderAdminData() {
+      document.getElementById('adminBrandsList').innerHTML = brands.map(b => `
+        <span class="inline-flex items-center gap-1 bg-white border border-[#E5DFD5] px-2 py-0.5 rounded text-[11px]">
+          ${b}
+          <button onclick="removeBrand('${b}')" class="text-red-500 hover:text-red-700 ml-1">×</button>
+        </span>
+      `).join('');
 
-      const filterSelect = document.getElementById('adminBrandFilter');
-      filterSelect.innerHTML = getUniqueBrands().map(b => `<option value="${b}">${b === 'Todas' ? 'Todas las marcas' : b}</option>`).join('');
-      
-      renderAdminCategories();
-      renderAdminGrid();
-    }
+      document.getElementById('adminCategoriesList').innerHTML = categories.map(c => `
+        <span class="inline-flex items-center gap-1 bg-white border border-[#E5DFD5] px-2 py-0.5 rounded text-[11px]">
+          ${c}
+          <button onclick="removeCategory('${c}')" class="text-red-500 hover:text-red-700 ml-1">×</button>
+        </span>
+      `).join('');
 
-    function exitAdminPage() {
-      document.getElementById('adminFullPage').classList.add('hidden');
-      document.getElementById('storefrontView').classList.remove('hidden');
-      renderBrands();
-      renderProducts();
-      window.scrollTo(0, 0);
-    }
+      document.getElementById('prodBrand').innerHTML = brands.map(b => `<option value="${b}">${b}</option>`).join('');
+      document.getElementById('prodCategory').innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join('');
 
-    function renderAdminCategories() {
-      document.getElementById('adminCategoryPills').innerHTML = CATEGORIES.map(c =>
-        `<button onclick="setAdminCategory('${c}')" class="whitespace-nowrap px-4 py-2 rounded-xl text-xs font-semibold transition ${c === adminSelectedCategory ? 'bg-[#8C735B] text-white shadow-2xs' : 'bg-[#F3EFE8] text-[#6E665F] hover:text-[#24201D]'}">${c}</button>`
-      ).join('');
-    }
-
-    function setAdminCategory(c) {
-      adminSelectedCategory = c;
-      renderAdminCategories();
-      renderAdminGrid();
-    }
-
-    function renderAdminGrid() {
-      const brandFilter = document.getElementById('adminBrandFilter').value;
-      const list = PRODUCTS.filter(p =>
-        (adminSelectedCategory === "Todos" || p.category === adminSelectedCategory) &&
-        (brandFilter === "Todas" || p.brand === brandFilter)
-      );
-
-      document.getElementById('adminProductGrid').innerHTML = list.map(p => `
-        <div class="bg-white rounded-2xl border border-[#E5DFD5] p-5 shadow-2xs hover:shadow-md transition flex flex-col justify-between gap-4">
-          
-          <!-- Parte Superior: Foto a la izquierda + Datos editables a la derecha -->
-          <div class="flex items-start gap-4">
-            <img id="preview_${p.id}" src="${p.img}" class="w-20 h-20 rounded-xl object-cover border border-[#E5DFD5] bg-[#F3EFE8] shrink-0" />
-            
-            <div class="flex-1 min-w-0 space-y-1.5">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[10px] uppercase tracking-widest text-[#8C735B] font-bold">${p.brand} · ${p.category}</span>
-              </div>
-              <input type="text" id="name_${p.id}" value="${p.name}" class="w-full bg-[#FAF8F5] border border-[#E5DFD5] text-[#24201D] text-sm font-bold px-2.5 py-1.5 rounded-lg outline-none focus:border-[#8C735B]" />
-              <input type="text" id="desc_${p.id}" value="${p.desc || ''}" placeholder="Descripción corta..." class="w-full bg-transparent text-[11px] text-[#6E665F] border-b border-transparent focus:border-[#E5DFD5] py-0.5 outline-none" />
+      document.getElementById('adminProductsList').innerHTML = products.map(p => `
+        <div class="p-3.5 flex items-center justify-between gap-4 hover:bg-[#FAF8F4]">
+          <div class="flex items-center gap-3 min-w-0">
+            <img src="${p.image}" class="w-10 h-10 rounded-lg object-cover bg-[#F5F1EA]" />
+            <div class="min-w-0">
+              <p class="text-xs font-semibold text-[#3A3532] truncate">${p.name}</p>
+              <p class="text-[11px] text-[#6E665F]">${p.brand} • ${p.category} ${p.ml ? '• ' + p.ml + ' ml' : ''} • $${Number(p.price).toFixed(2)}</p>
             </div>
           </div>
-
-          <!-- Parte Media: Precio + Botones Archivo y Cámara -->
-          <div class="grid grid-cols-12 gap-2.5 items-end pt-2 border-t border-[#F3EFE8]">
-            <div class="col-span-5">
-              <label class="block text-[10px] uppercase tracking-wider text-[#6E665F] font-semibold mb-1">Precio ($ USD)</label>
-              <input type="number" id="price_${p.id}" value="${p.price}" class="w-full bg-[#FAF8F5] border border-[#E5DFD5] text-[#24201D] text-xs font-bold px-3 py-2 rounded-xl outline-none focus:border-[#8C735B]" />
-            </div>
-
-            <div class="col-span-7 flex gap-2">
-              <label for="file_${p.id}" class="flex-1 cursor-pointer bg-[#F3EFE8] hover:bg-[#E5DFD5] text-[#24201D] py-2 px-2.5 rounded-xl text-[11px] font-semibold transition flex items-center justify-center gap-1 text-center">
-                <span>📁</span> Archivo
-              </label>
-              <input type="file" id="file_${p.id}" accept="image/*" onchange="handleAdminImageSelect(${p.id}, 'file_${p.id}')" class="hidden" />
-
-              <label for="cam_${p.id}" class="flex-1 cursor-pointer bg-[#8C735B] hover:bg-[#735d49] text-white py-2 px-2.5 rounded-xl text-[11px] font-semibold transition flex items-center justify-center gap-1 text-center">
-                <span>📷</span> Cámara
-              </label>
-              <input type="file" id="cam_${p.id}" accept="image/*" capture="environment" onchange="handleAdminImageSelect(${p.id}, 'cam_${p.id}')" class="hidden" />
-            </div>
-          </div>
-
-          <!-- Pie de tarjeta: Nombre de archivo actual + Botón Eliminar -->
-          <div class="flex items-center justify-between text-[11px] pt-1">
-            <span id="filename_${p.id}" class="text-[#6E665F] truncate max-w-[65%]">${p.fileName || 'imagen_producto.jpg'}</span>
-            <button onclick="deleteProduct(${p.id})" class="text-red-600 hover:text-red-800 font-semibold flex items-center gap-1 transition">
-              <span>🗑️</span> Eliminar
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="editProduct(${p.id})" class="px-2.5 py-1 rounded bg-[#F5F1EA] hover:bg-[#E5DFD5] text-xs text-[#3A3532]">
+              Editar
+            </button>
+            <button onclick="deleteProduct(${p.id})" class="px-2.5 py-1 rounded bg-red-50 hover:bg-red-100 text-xs text-red-600">
+              Eliminar
             </button>
           </div>
         </div>
       `).join('');
     }
 
-    function handleAdminImageSelect(id, inputId) {
-      const input = document.getElementById(inputId);
-      if (input.files && input.files[0]) {
-        const file = input.files[0];
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const product = PRODUCTS.find(p => p.id === id);
-          if (product) {
-            product.img = e.target.result;
-            product.fileName = file.name;
-          }
-          document.getElementById(`preview_${id}`).src = e.target.result;
-          document.getElementById(`filename_${id}`).textContent = file.name;
-        };
-        reader.readAsDataURL(file);
+    function addBrand() {
+      const val = document.getElementById('newBrandInput').value.trim();
+      if (val && !brands.includes(val)) {
+        brands.push(val);
+        document.getElementById('newBrandInput').value = '';
+        saveState();
+        renderFilters();
+        renderAdminData();
       }
     }
 
-    function saveAdminChanges() {
-      PRODUCTS.forEach(p => {
-        const n = document.getElementById(`name_${p.id}`);
-        const d = document.getElementById(`desc_${p.id}`);
-        const pr = document.getElementById(`price_${p.id}`);
-        if (n) p.name = n.value;
-        if (d) p.desc = d.value;
-        if (pr) p.price = Number(pr.value);
-      });
-      localStorage.setItem('auraskin_custom_products', JSON.stringify(PRODUCTS));
-      alert("✓ ¡Cambios guardados en la web con éxito!");
+    function removeBrand(brand) {
+      brands = brands.filter(b => b !== brand);
+      saveState();
+      renderFilters();
+      renderAdminData();
     }
 
-    // Modal Nuevo Producto
-    function openNewProductModal() { document.getElementById('newProductModal').classList.remove('hidden'); }
-    function closeNewProductModal() { document.getElementById('newProductModal').classList.add('hidden'); }
-
-    let tempNewProductImg = "";
-    let tempNewProductFileName = "nuevo_producto.jpg";
-
-    function previewNewProductFile(inputId) {
-      const input = document.getElementById(inputId);
-      if (input.files && input.files[0]) {
-        tempNewProductFileName = input.files[0].name;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          tempNewProductImg = e.target.result;
-          document.getElementById('newImgPreview').src = e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
+    function addCategory() {
+      const val = document.getElementById('newCategoryInput').value.trim();
+      if (val && !categories.includes(val)) {
+        categories.push(val);
+        document.getElementById('newCategoryInput').value = '';
+        saveState();
+        renderFilters();
+        renderAdminData();
       }
     }
 
-    function addNewProduct() {
-      const brand = document.getElementById('newBrand').value;
-      const category = document.getElementById('newCategory').value;
-      const name = document.getElementById('newName').value.trim();
-      const price = Number(document.getElementById('newPrice').value);
-      const size = document.getElementById('newSize').value.trim() || "100ml";
-      const desc = document.getElementById('newDesc').value.trim() || "Producto original K-Beauty.";
-      const img = tempNewProductImg || "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80";
+    function removeCategory(cat) {
+      categories = categories.filter(c => c !== cat);
+      saveState();
+      renderFilters();
+      renderAdminData();
+    }
 
-      if (!name || !price) {
-        return alert("Por favor coloca el nombre y el precio del producto.");
+    function editProduct(id) {
+      const p = products.find(item => item.id === id);
+      if (!p) return;
+      document.getElementById('productFormTitle').textContent = "Editando Producto";
+      document.getElementById('cancelEditBtn').classList.remove('hidden');
+      document.getElementById('editProductId').value = p.id;
+      document.getElementById('prodName').value = p.name;
+      document.getElementById('prodBrand').value = p.brand;
+      document.getElementById('prodCategory').value = p.category;
+      document.getElementById('prodPrice').value = p.price;
+      document.getElementById('prodMl').value = p.ml || '';
+      document.getElementById('prodImage').value = p.image || '';
+      document.getElementById('prodDesc').value = p.desc || '';
+    }
+
+    function resetProductForm() {
+      document.getElementById('productFormTitle').textContent = "Agregar Nuevo Producto";
+      document.getElementById('cancelEditBtn').classList.add('hidden');
+      document.getElementById('editProductId').value = '';
+      document.getElementById('prodName').value = '';
+      document.getElementById('prodPrice').value = '';
+      document.getElementById('prodMl').value = '';
+      document.getElementById('prodImage').value = '';
+      document.getElementById('prodDesc').value = '';
+    }
+
+    function saveProduct() {
+      const editId = document.getElementById('editProductId').value;
+      const name = document.getElementById('prodName').value.trim();
+      const brand = document.getElementById('prodBrand').value;
+      const category = document.getElementById('prodCategory').value;
+      const price = parseFloat(document.getElementById('prodPrice').value);
+      const ml = document.getElementById('prodMl').value ? parseInt(document.getElementById('prodMl').value) : null;
+      const image = document.getElementById('prodImage').value.trim();
+      const desc = document.getElementById('prodDesc').value.trim();
+
+      if (!name || isNaN(price)) {
+        alert("Por favor completa al menos el nombre y el precio del producto.");
+        return;
       }
 
-      const newId = PRODUCTS.length > 0 ? Math.max(...PRODUCTS.map(p => p.id)) + 1 : 1;
-      PRODUCTS.unshift({ id: newId, brand, name, category, price, size, badge: "Nuevo", desc, img, fileName: tempNewProductFileName });
-      localStorage.setItem('auraskin_custom_products', JSON.stringify(PRODUCTS));
+      if (editId) {
+        const index = products.findIndex(p => p.id === parseInt(editId));
+        if (index !== -1) {
+          products[index] = { ...products[index], name, brand, category, price, ml, image, desc };
+        }
+      } else {
+        const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+        products.push({ id: newId, name, brand, category, price, ml, image, desc });
+      }
 
-      document.getElementById('newName').value = "";
-      document.getElementById('newPrice').value = "";
-      document.getElementById('newSize').value = "";
-      document.getElementById('newDesc').value = "";
-      tempNewProductImg = "";
-
-      closeNewProductModal();
-      renderAdminGrid();
-      alert("✓ Producto añadido al catálogo.");
+      saveState();
+      resetProductForm();
+      renderProducts();
+      renderAdminData();
     }
 
     function deleteProduct(id) {
-      if (!confirm("¿Eliminar este producto del catálogo?")) return;
-      PRODUCTS = PRODUCTS.filter(p => p.id !== id);
-      localStorage.setItem('auraskin_custom_products', JSON.stringify(PRODUCTS));
-      renderAdminGrid();
+      if (!confirm("¿Seguro que deseas eliminar este producto?")) return;
+      products = products.filter(p => p.id !== id);
+      saveState();
+      renderProducts();
+      renderAdminData();
     }
 
     function exportUpdatedHTML() {
-      saveAdminChanges();
-      // Asegura exportar con la tienda visible por defecto
-      document.getElementById('adminFullPage').classList.add('hidden');
-      document.getElementById('storefrontView').classList.remove('hidden');
-
-      const currentHTML = document.documentElement.outerHTML;
-      const updatedProductsJSON = JSON.stringify(PRODUCTS, null, 2);
-      const finalHTML = "<!DOCTYPE html>\n" + currentHTML.replace(
-        /const DEFAULT_PRODUCTS = \[[\s\S]*?\];/,
-        `const DEFAULT_PRODUCTS = ${updatedProductsJSON};`
+      let currentDoc = document.documentElement.outerHTML;
+      currentDoc = currentDoc.replace(
+        /const defaultBrands = \[[\s\S]*?\];/,
+        `const defaultBrands = ${JSON.stringify(brands)};`
+      ).replace(
+        /const defaultCategories = \[[\s\S]*?\];/,
+        `const defaultCategories = ${JSON.stringify(categories)};`
+      ).replace(
+        /const defaultProducts = \[[\s\S]*?\];/,
+        `const defaultProducts = ${JSON.stringify(products, null, 2)};`
       );
-
-      // Vuelve a mostrar el panel de control al usuario
-      document.getElementById('storefrontView').classList.add('hidden');
-      document.getElementById('adminFullPage').classList.remove('hidden');
-
-      const blob = new Blob([finalHTML], { type: "text/html;charset=utf-8" });
+      const blob = new Blob(["<!DOCTYPE html>\n" + currentDoc], { type: "text/html" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download = "index.html";
       a.click();
     }
 
-    function openSettings() {
-      document.getElementById('settingWhatsapp').value = storeConfig.whatsapp;
-      document.getElementById('settingsModal').classList.remove('hidden');
-    }
-    function closeSettings() {
-      const wa = document.getElementById('settingWhatsapp').value.trim();
-      if (wa) { storeConfig.whatsapp = wa; localStorage.setItem('auraskin_wa', wa); }
-      document.getElementById('settingsModal').classList.add('hidden');
-    }
-
-    init();
+    renderFilters();
+    renderProducts();
+    updateCartUI();
   </script>
 </body>
 </html>
