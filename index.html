@@ -33,11 +33,18 @@
     <div class="bg-[#24201D] text-[#FAF8F5] text-xs tracking-wider py-2.5 px-4 sm:px-6 flex justify-between items-center gap-3">
       <span>envíos gratis a partir de $100</span>
       <div class="flex items-center gap-2 shrink-0">
-        <button onclick="openAdminLogin()" class="bg-[#8C735B] text-white px-3.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-widest hover:bg-[#725c48] transition flex items-center gap-1.5">
-          <span>✦</span> Camerino Backstage
-        </button>
+        <a id="topWhatsappBtn" href="https://wa.me/584142120336" target="_blank" rel="noopener" title="Escríbenos por WhatsApp" class="border border-[#FAF8F5]/40 hover:bg-white/10 text-[#FAF8F5] px-3.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-widest transition flex items-center gap-1.5">
+          <i class="fa-brands fa-whatsapp text-sm"></i><span>WhatsApp</span>
+        </a>
+        <button onclick="openAdminLogin()" aria-label="Acceso" class="w-7 h-7 rounded-full text-[#FAF8F5]/40 hover:text-[#FAF8F5] flex items-center justify-center text-sm transition">✦</button>
       </div>
     </div>
+
+    <!-- Bolsa flotante (abajo a la derecha) -->
+    <button onclick="toggleCart(true)" aria-label="Abrir mi bolsa" class="fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full bg-[#24201D] text-white shadow-xl hover:bg-[#8C735B] transition flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+      <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-[#FAF8F5] text-[#24201D] border border-[#E5DFD5] text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+    </button>
 
     <!-- Header con Logo Centrado -->
     <header class="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E5DFD5]">
@@ -54,22 +61,14 @@
         </div>
 
         <div class="flex items-center gap-3 ml-auto">
-          <a id="topWhatsappBtn" href="https://wa.me/584142120336" target="_blank" rel="noopener" title="Escríbenos por WhatsApp" class="p-2.5 rounded-full hover:bg-[#F3EFE8] border border-[#E5DFD5] text-xs flex items-center gap-1.5 text-[#24201D]">
-            <i class="fa-brands fa-whatsapp text-sm"></i><span class="hidden sm:inline font-medium">WhatsApp</span>
-          </a>
-          <button onclick="toggleCart(true)" class="relative p-2.5 rounded-full bg-[#24201D] text-white hover:bg-[#3d3631] flex items-center gap-2 px-4 transition">
-            <span class="text-xs font-medium">Bolsa</span>
-            <span id="cartCountBadge" class="bg-[#FAF8F5] text-[#24201D] text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
-          </button>
         </div>
       </div>
     </header>
 
     <!-- Hero Minimalista -->
     <section class="bg-[#F3EFE8] border-b border-[#E5DFD5] py-16 text-center px-4">
-      <p class="text-xs uppercase tracking-[0.3em] text-[#8C735B] font-semibold mb-2">Curaduría K-Beauty</p>
+      <p class="text-xs uppercase tracking-[0.3em] text-[#8C735B] font-semibold mb-2">K-Beauty</p>
       <h1 class="font-editorial text-4xl sm:text-6xl font-semibold text-[#24201D]">The Glow Ritual</h1>
-      <p class="text-xs sm:text-sm text-[#6E665F] max-w-md mx-auto mt-2">Haruharu Wonder, Centellian24 Madeca Cream, Shots, Anua, Medicube y mucho más.</p>
     </section>
 
     <!-- Catálogo -->
